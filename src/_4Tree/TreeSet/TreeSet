@@ -1,0 +1,37 @@
+What is TreeSet?
+TreeSet is a class in Java that implements the SortedSet interface and extends AbstractSet.
+1-It stores unique elements like any other Set but also maintains elements in sorted order
+(natural ordering or via a Comparator).
+2-Internally, it is backed by a Red-Black Tree (a balanced binary search tree).
+3-Because of this tree structure, it provides logarithmic time complexity (O(log n)) f
+or basic operations like add, remove, and contains.
+
+Key Features of TreeSet:
+| Feature            | Details                                                                         |
+| ------------------ | ------------------------------------------------------------------------------- |
+| Ordering           | Elements are stored in **sorted ascending order** (natural ordering by default) |
+| Allows Duplicates  | No, duplicates are ignored                                                      |
+| Allows Null        | **No**, attempting to add `null` throws `NullPointerException`                  |
+| Thread Safety      | Not synchronized                                                                |
+| Performance        | O(log n) for add, remove, and contains operations                               |
+| Additional Methods | Provides methods like `first()`, `last()`, `headSet()`, `tailSet()`, `subSet()` |
+
+When to Use TreeSet?
+When you want a set of unique elements sorted automatically.
+When you need efficient search, insertion, and removal with ordered traversal.
+Useful for applications like leaderboards, range queries, or when sorted data is required without duplicates.
+
+Common Methods of TreeSet
+| Method                               | Description                                                                  |
+| ------------------------------------ | ---------------------------------------------------------------------------- |
+| `add(E e)`                           | Adds element `e` if not already present                                      |
+| `remove(Object o)`                   | Removes specified element                                                    |
+| `contains(Object o)`                 | Checks if element exists                                                     |
+| `first()`                            | Returns the lowest (first) element                                           |
+| `last()`                             | Returns the highest (last) element                                           |
+| `headSet(E toElement)`               | Returns a view of the portion of this set less than `toElement`              |
+| `tailSet(E fromElement)`             | Returns a view of the portion of this set greater or equal to `fromElement`  |
+| `subSet(E fromElement, E toElement)` | Returns a view between `fromElement` (inclusive) and `toElement` (exclusive) |
+| `size()`                             | Returns number of elements                                                   |
+| `isEmpty()`                          | Checks if set is empty                                                       |
+| `clear()`                            | Removes all elements                                                         |

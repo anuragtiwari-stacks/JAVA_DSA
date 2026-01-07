@@ -1,0 +1,46 @@
+🔷 What is HashSet?
+HashSet is part of Java’s Collection Framework.
+It implements the Set interface.
+It stores unique elements only.
+It is unordered (no indexing).
+It is backed by a HashMap.
+It allows null elements (only one).
+
+
+✅ Key Features
+| Feature                 | Description                               |
+| ----------------------- | ----------------------------------------- |
+| No Duplicates           | Stores only unique values                 |
+| No Order Guaranteed     | Does not maintain insertion order         |
+| Fast Performance        | Offers constant time for basic operations |
+| Allows One `null` Value | Yes                                       |
+
+
+✅ Commonly Used Methods
+| Method               | Description                  |
+| -------------------- | ---------------------------- |
+| `add(E e)`           | Adds an element              |
+| `remove(Object o)`   | Removes the element          |
+| `contains(Object o)` | Checks if the element exists |
+| `isEmpty()`          | Checks if the set is empty   |
+| `size()`             | Returns number of elements   |
+| `clear()`            | Removes all elements         |
+| `iterator()`         | Returns an iterator          |
+
+
+🔸 Differences: HashSet vs TreeSet vs LinkedHashSet
+| Feature       | `HashSet`        | `LinkedHashSet`           | `TreeSet`           |
+| ------------- | ---------------- | ------------------------- | ------------------- |
+| Order         | Unordered        | Maintains insertion order | Sorted (ascending)  |
+| Performance   | Fastest          | Slightly slower           | Slower than HashSet |
+| Null Elements | One null allowed | One null allowed          | No nulls allowed    |
+
+
+✅ Summary
+| Concept              | Details                                   |
+| -------------------- | ----------------------------------------- |
+| Uniqueness           | Ensured using `hashCode()` and `equals()` |
+| Duplicates allowed?  | ❌ No                                     |
+| Order guaranteed?    | ❌ No                                     |
+| Null values allowed? | ✅ Only one                               |
+| Use when?            | Need fast lookup and uniqueness           |

@@ -1,0 +1,33 @@
+What is LinkedHashSet?
+1-LinkedHashSet is a collection class in Java that implements the Set interface.
+2-It stores unique elements (no duplicates allowed).
+3-Unlike HashSet, which does not guarantee any order,
+LinkedHashSet maintains insertion order of the elements.
+4-It is backed by a hash table and a doubly-linked list internally.
+5-It allows one null element.
+
+It provides constant-time performance for basic operations
+like add, remove, and contains, assuming good hash function distribution.
+
+Key Properties of LinkedHashSet:
+| Feature           | Details                                                             |
+| ----------------- | ------------------------------------------------------------------- |
+| Maintains Order   | Yes, preserves the order in which elements were inserted            |
+| Allows Duplicates | No, duplicates are ignored                                          |
+| Allows Null       | Yes, one null element is allowed                                    |
+| Thread Safety     | Not synchronized, should be externally synchronized if needed       |
+| Performance       | Similar to HashSet, O(1) average time for add, remove, and contains |
+
+
+When to Use LinkedHashSet?
+When you need a collection with no duplicates and order preservation.
+For example, storing unique elements and iterating over them in the order they were added.
+When you want better iteration order predictability than HashSet.
+
+Summary:
+LinkedHashSet preserves insertion order.
+Duplicate elements are ignored.
+One null element is allowed.
+Supports all basic set operations like add, remove, contains, clear.
+Iteration order matches the order of insertion.
+
