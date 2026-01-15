@@ -1,4 +1,4 @@
-package _12Greedy;
+package _12Greedy.PW;
 
 import java.util.Arrays;
 

@@ -1,80 +1,99 @@
 package _12Greedy.MIK;
 
-// Leetcode 991
-// Custom Logic: if startValue even then *2 else -1
-
 public class _4BrokenCaluclator
 {
-    public int customCalc(int startValue, int target)
+    public int brokenCalc(int startValue, int target)
     {
         int operations = 0;
 
-        while(startValue != target)
+        while(target > startValue)
         {
-            if(startValue % 2 == 0)
+            operations++;
+            if(target % 2 == 1)
             {
-                startValue = startValue * 2;
+                target++;
             }
             else
             {
-                startValue = startValue - 1;
-            }
-
-            operations = operations + 1;
-
-            if(startValue > target)
-            {
-                // Avoid infinite loop by trimming extra
-                operations = operations + (startValue - target);
-                startValue = target;
+                target /= 2;
             }
         }
 
-        return operations;
+        return operations + (startValue - target);
     }
 
     public static void main(String[] args)
     {
         _4BrokenCaluclator obj = new _4BrokenCaluclator();
 
-        System.out.println(obj.customCalc(2, 10)); // Example
-        System.out.println(obj.customCalc(3, 10)); // Example
-        System.out.println(obj.customCalc(5, 8));  // Example
+        System.out.println(obj.brokenCalc(3, 10)); // Expected 3
+        System.out.println(obj.brokenCalc(2, 3));  // Expected 2
+        System.out.println(obj.brokenCalc(5, 8));  // Expected 2
+        System.out.println(obj.brokenCalc(3, 3));  // Expected 0
     }
 }
 
 /*
 ---------------- DRY RUN ----------------
 
-Example 1:
-startValue = 2, target = 10
-ops = 0
-
-2 even → *2 = 4 (ops=1)
-4 even → *2 = 8 (ops=2)
-8 even → *2 = 16 (ops=3)
-
-16 > 10 → trim:
-ops += 16 - 10 = 6 -? Actually 16-10=6 => ops=3+6=9
-startValue = 10
-
-FINAL ops = 9
-
-------------------------------------------
-
-Example 2:
+Input:
 startValue = 3, target = 10
 
-3 odd → -1 = 2 (ops=1)
-2 even → *2 = 4 (ops=2)
-4 even → *2 = 8 (ops=3)
-8 even → *2 = 16 (ops=4)
+Step 1:
+target > startValue → 10 > 3
+10 is even → target = 10/2 = 5
+operations = 1
 
-16 > 10 → trim:
-ops += 6 → ops=10
-startValue = 10
+Step 2:
+target > startValue → 5 > 3
+5 is odd → target = 5 + 1 = 6
+operations = 2
 
-FINAL ops = 10
+Step 3:
+target > startValue → 6 > 3
+6 is even → target = 6/2 = 3
+operations = 3
 
-------------------------------------------
+Now target == startValue → stop
+
+Final Answer = operations + (startValue - target)
+              = 3 + (3 - 3)
+              = 3
+
+--------------------------------------------------
+
+Input:
+startValue = 2, target = 3
+
+Step 1:
+3 > 2 → 3 odd → target = 4, ops=1
+Step 2:
+4 > 2 → 4 even → target = 2, ops=2
+Now target == startValue
+
+Answer = 2 + (2-2) = 2
+
+--------------------------------------------------
+
+Input:
+startValue = 5, target = 8
+
+Step 1:
+8 > 5 → 8 even → target=4, ops=1
+Now target < startValue
+
+Answer = ops + (startValue - target)
+       = 1 + (5 - 4)
+       = 2
+
+--------------------------------------------------
+
+Input:
+startValue = 3, target = 3
+
+target == startValue initially
+
+Answer = 0 + (3-3) = 0
+
+--------------------------------------------------
 */

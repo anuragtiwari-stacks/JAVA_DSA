@@ -30,7 +30,7 @@ public class _8MaximumBagsWithFullCapacityOfRocks
             }
             else if(additionalRocks >= need[i])
             {
-                additionalRocks -= need[i];
+                additionalRocks = additionalRocks - need[i];
                 count++;
             }
             else

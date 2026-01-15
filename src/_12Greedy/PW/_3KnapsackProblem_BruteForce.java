@@ -6,7 +6,7 @@ If you want fractional greedy, we just need to modify the picking loop so that:
 If the next item’s weight doesn’t fully fit, we take only the fraction that fits.
 Add that proportional profit, then stop.
 */
-package _12Greedy;
+package _12Greedy.PW;
 
 public class _3KnapsackProblem_BruteForce
 {

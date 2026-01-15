@@ -1,4 +1,4 @@
-package _12Greedy;
+package _12Greedy.PW;
 
 public class _1IndianCoin {
 }
