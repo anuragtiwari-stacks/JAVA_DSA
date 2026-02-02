@@ -147,9 +147,7 @@ public class _18MinimumCostToConvertStringII
         String[] changed  = { "cde", "thh", "ghh" };
         int[] cost        = { 1, 3, 5 };
 
-        long ans = obj.minimumCost(
-                source, target, original, changed, cost
-        );
+        long ans = obj.minimumCost(source, target, original, changed, cost);
 
         System.out.println(ans);
     }
