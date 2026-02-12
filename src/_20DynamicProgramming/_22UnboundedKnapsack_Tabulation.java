@@ -1,0 +1,58 @@
+package _20DynamicProgramming;
+
+// Unbounded Knapsack using Tabulation (Bottom-Up DP)
+public class _22UnboundedKnapsack_Tabulation
+{
+    public static int knapsack(int[] wt, int[] val, int C)
+    {
+        int n = wt.length;
+
+        // dp[i][w] = maximum profit using first i items with capacity w
+        int[][] dp = new int[n + 1][C + 1];
+
+        for (int i = 1; i <= n; i++)
+        {
+            for (int w = 0; w <= C; w++)
+            {
+                // Option 1: skip current item
+                dp[i][w] = dp[i - 1][w];
+
+                // Option 2: pick current item (UNBOUNDED)
+                if (wt[i - 1] <= w)
+                {
+                    dp[i][w] = Math.max(
+                            dp[i][w],
+                            val[i - 1] + dp[i][w - wt[i - 1]]
+                    );
+                }
+            }
+        }
+
+        return dp[n][C];
+    }
+
+    public static void main(String[] args)
+    {
+        int[] wt  = {1, 3, 4, 5};
+        int[] val = {1, 4, 5, 7};
+        int C = 7;
+
+        System.out.println(knapsack(wt, val, C));
+    }
+}
+
+/*
+FINAL DP TABLE (Unbounded Knapsack)
+
+wt  = [1, 3, 4, 5]
+val = [1, 4, 5, 7]
+Capacity = 7
+
+      0 1 2 3 4 5 6 7
+   -------------------
+0 |  0 0 0 0 0 0 0 0
+1 |  0 1 2 3 4 5 6 7
+2 |  0 1 2 4 5 6 8 9
+3 |  0 1 2 4 5 6 8 9
+4 |  0 1 2 4 5 7 8 9
+*/

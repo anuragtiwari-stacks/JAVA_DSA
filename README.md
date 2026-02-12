@@ -10,27 +10,28 @@ This repository contains **well-organized Java implementations** of core DSA con
 
 ```text
 src/
-├── Array                     → Array problems
-├── String                    → String problems
+├── _1Array                     → Array problems
+├── _2String                    → String problems
+├── _3LinkedList              → Linked List (Basics, Methods, PW)
+├── _4Stack                   → Stack (Basics & Questions)
+├── _5Queue                   → Queue & Deque
+├── _6Tree                    → Binary Tree & BST
+├── _7Hashing                 → HashSet, HashMap, TreeMap
+├── _8Heap                    → Heap (Min/Max Heap & Problems)
+├── _9Graph                   → Graph (BFS, DFS, Shortest Paths)
+├── _10PrefixSum               → Prefix Sum techniques
+├── _11BitManipulation         → Bit Manipulation
+├── _12SlidingWindow           → Sliding Window problems
+├── _13Searching              → Searching algorithms
+├── _14Sorting                → Sorting algorithms & questions
+├── _15Greedy                 → Greedy algorithms
+├── _16Tries                  → Trie data structure
+├── _17SegmentTree            → Segment Tree
+├── _18Recursion              → Recursion basics
+├── _19BackTracking           → Backtracking questions
+├── _20DynamicProgramming     → Dynamic Programming (Memoization & Tabulation)
 ├── COMPARATOR                → Comparator & Lambda examples
-│
-├── _1LinkedList              → Linked List (Basics, Methods, PW)
-├── _2Stack                   → Stack (Basics & Questions)
-├── _3Queue                   → Queue & Deque
-├── _4Tree                    → Binary Tree & BST
-├── _5Hashing                 → HashSet, HashMap, TreeMap
-├── _5Heap                    → Heap (Min/Max Heap & Problems)
-├── _6Graph                   → Graph (BFS, DFS, Shortest Paths)
-├── _7PrefixSum               → Prefix Sum techniques
-├── _8BitManipulation         → Bit Manipulation
-├── _9SlidingWindow           → Sliding Window problems
-├── _10Searching              → Searching algorithms
-├── _11Sorting                → Sorting algorithms & questions
-├── _12Greedy                 → Greedy algorithms
-├── _13Tries                  → Trie data structure
-├── _14SegmentTree            → Segment Tree
-├── _15Recursion              → Recursion & Backtracking basics
-├── _17DynamicProgramming     → Dynamic Programming (Memoization & Tabulation)
+
 ```
 
 ---
