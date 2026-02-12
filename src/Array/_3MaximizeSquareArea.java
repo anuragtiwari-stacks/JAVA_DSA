@@ -1,6 +1,6 @@
 // Not a LeetCode Problem - Maximize Square Area
 
-package Array_String;
+package Array;
 
 public class _3MaximizeSquareArea
 {

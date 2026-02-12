@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 1877: Minimize Maximum Pair Sum in Array
 import java.util.Arrays;

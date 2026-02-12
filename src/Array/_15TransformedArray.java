@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 /*
 LeetCode 3379 - Transformed Array

@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 1975 - Maximum Matrix Sum
 public class _2MaximumMatrixSum

@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 263: Ugly Number
 public class _8UglyNumber

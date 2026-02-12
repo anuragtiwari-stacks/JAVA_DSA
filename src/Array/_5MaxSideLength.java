@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 1292: Maximum Side Length of a Square with Sum <= Threshold
 public class _5MaxSideLength

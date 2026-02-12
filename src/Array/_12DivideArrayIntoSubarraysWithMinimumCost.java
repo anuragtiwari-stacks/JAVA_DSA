@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 3010
 // Divide an Array Into Subarrays With Minimum Cost I

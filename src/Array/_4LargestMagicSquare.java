@@ -1,4 +1,4 @@
-package Array_String;
+package Array;
 
 // LeetCode 1895: Largest Magic Square
 public class _4LargestMagicSquare

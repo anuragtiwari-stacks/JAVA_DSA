@@ -1,21 +1,29 @@
-package Array_String;
+package Array;
 
-// LeetCode 3507: Minimum Pair Removal to Sort Array I (Array Version)
-public class _6MinimumPairRemovalToSortArray
+// LeetCode 3507: Minimum Pair Removal to Sort Array I
+import java.util.ArrayList;
+
+public class _6MinimumPairRemovalToSortArrayList
 {
     public int minimumPairRemoval(int[] nums)
     {
-        int n = nums.length;
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int x : nums)
+        {
+            list.add(x);
+        }
+
         int operations = 0;
 
-        while (!isSorted(nums, n))
+        while (!isSorted(list))
         {
             int minSum = Integer.MAX_VALUE;
             int idx = 0;
 
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 0; i < list.size() - 1; i++)
             {
-                int sum = nums[i] + nums[i + 1];
+                int sum = list.get(i) + list.get(i + 1);
 
                 if (sum < minSum)
                 {
@@ -24,25 +32,23 @@ public class _6MinimumPairRemovalToSortArray
                 }
             }
 
-            nums[idx] = minSum;
+            int merged = minSum;
 
-            for (int i = idx + 1; i < n - 1; i++)
-            {
-                nums[i] = nums[i + 1];
-            }
+            list.remove(idx);
+            list.remove(idx);
+            list.add(idx, merged);
 
-            n--;
             operations++;
         }
 
         return operations;
     }
 
-    private boolean isSorted(int[] nums, int n)
+    private boolean isSorted(ArrayList<Integer> list)
     {
-        for (int i = 1; i < n; i++)
+        for (int i = 1; i < list.size(); i++)
         {
-            if (nums[i] < nums[i - 1])
+            if (list.get(i) < list.get(i - 1))
             {
                 return false;
             }
@@ -55,7 +61,7 @@ public class _6MinimumPairRemovalToSortArray
     {
         int[] nums = {5, 2, 3, 1};
 
-        _6MinimumPairRemovalToSortArray obj = new _6MinimumPairRemovalToSortArray();
+        _6MinimumPairRemovalToSortArrayList obj = new _6MinimumPairRemovalToSortArrayList();
 
         System.out.println(obj.minimumPairRemoval(nums));
     }
@@ -68,18 +74,19 @@ public class _6MinimumPairRemovalToSortArray
 Input:
 nums = [5, 2, 3, 1]
 
-n = 4
+Initial list:
+[5, 2, 3, 1]
 
 Iteration 1:
 Adjacent sums:
 (5,2)=7 , (2,3)=5 , (3,1)=4
 minSum = 4, idx = 2
 
-Merge:
-nums[2] = 4
-Array becomes (logical size 3):
-[5, 2, 4]
+Remove elements at index 2 and 3
+Add merged value 4 at index 2
 
+List becomes:
+[5, 2, 4]
 operations = 1
 
 Iteration 2:
@@ -87,14 +94,14 @@ Adjacent sums:
 (5,2)=7 , (2,4)=6
 minSum = 6, idx = 1
 
-Merge:
-nums[1] = 6
-Array becomes (logical size 2):
-[5, 6]
+Remove elements at index 1 and 2
+Add merged value 6 at index 1
 
+List becomes:
+[5, 6]
 operations = 2
 
-Array is non-decreasing.
+List is non-decreasing.
 Loop stops.
 
 Output: 2
