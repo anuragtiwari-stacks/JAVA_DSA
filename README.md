@@ -10,7 +10,8 @@ This repository contains **well-organized Java implementations** of core DSA con
 
 ```text
 src/
-├── Array_String              → Array & String problems
+├── Array                     → Array problems
+├── String                    → String problems
 ├── COMPARATOR                → Comparator & Lambda examples
 │
 ├── _1LinkedList              → Linked List (Basics, Methods, PW)
