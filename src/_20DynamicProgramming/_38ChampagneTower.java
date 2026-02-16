@@ -2,40 +2,13 @@ package _20DynamicProgramming;
 
 /*
 Leetcode 799 - Champagne Tower
+(Pure Recursion - No DP)
 */
 
-public class ChampagneTower_799
+public class _38ChampagneTower
 {
 
-    public static void main(String[] args)
-    {
-        ChampagneTower_799 obj = new ChampagneTower_799();
-
-        int poured = 4;
-        int query_row = 2;
-        int query_glass = 1;
-
-        double ans = obj.champagneTower(poured, query_row, query_glass);
-
-        System.out.println("Poured: " + poured);
-        System.out.println("Query Row: " + query_row);
-        System.out.println("Query Glass: " + query_glass);
-        System.out.println("Answer: " + ans);
-    }
-
-    public double champagneTower(int poured, int query_row, int query_glass)
-    {
-        double result = solve(query_row, query_glass, poured);
-
-        if (result > 1.0)
-        {
-            return 1.0;
-        }
-
-        return result;
-    }
-
-    public double solve(int r, int c, double poured)
+    public static double solve(int r, int c, double poured)
     {
         if (r == 0 && c == 0)
         {
@@ -65,49 +38,111 @@ public class ChampagneTower_799
 
         return leftOverflow + rightOverflow;
     }
+
+    public static double champagneTower(int poured, int query_row, int query_glass)
+    {
+        double result = solve(query_row, query_glass, poured);
+
+        if (result > 1.0)
+        {
+            return 1.0;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args)
+    {
+        int poured = 4;
+        int query_row = 2;
+        int query_glass = 1;
+
+        double answer = champagneTower(poured, query_row, query_glass);
+
+        System.out.println("Champagne in glass = " + answer);
+    }
 }
 
 
 /*
-==========================
-Dry Run
-==========================
+==========================================================
+                FULL EXPANDED DRY RUN
+==========================================================
 
-Input:
+INPUT:
 poured = 4
 query_row = 2
 query_glass = 1
 
-Row 0:              (0,0)
-Row 1:        (1,0)      (1,1)
-Row 2:    (2,0)    (2,1)    (2,2)
+STRUCTURE:
 
-Step 1:
+Row 0:              (0,0)
+
+Row 1:        (1,0)        (1,1)
+
+Row 2:    (2,0)     (2,1)      (2,2)
+
+We compute:
 solve(2,1)
 
-It depends on:
-solve(1,0) and solve(1,1)
+----------------------------------------------------------
+Formula:
 
-solve(1,0):
+solve(r,c) =
+    overflow from left parent
+  + overflow from right parent
+
+Overflow formula:
+If parent <= 1 → 0
+If parent > 1  → (parent - 1) / 2
+
+----------------------------------------------------------
+EXPAND solve(2,1)
+
+solve(2,1)
+    leftParent  = solve(1,0)
+    rightParent = solve(1,1)
+
+----------------------------------------------------------
+Compute solve(1,0)
+
+solve(1,0)
     leftParent  = solve(0,-1) = 0
-    rightParent = solve(0,0)  = 4
+    rightParent = solve(0,0)
 
-    rightOverflow = (4 - 1) / 2
-                   = 3 / 2
-                   = 1.5
+solve(0,0)
+    Base case → return poured = 4
 
-    solve(1,0) = 1.5
+So:
+leftParent  = 0
+rightParent = 4
 
-solve(1,1):
+Overflow:
+leftOverflow  = 0
+rightOverflow = (4 - 1) / 2
+               = 3 / 2
+               = 1.5
+
+So:
+solve(1,0) = 1.5
+
+----------------------------------------------------------
+Compute solve(1,1)
+
+solve(1,1)
     leftParent  = solve(0,0) = 4
     rightParent = solve(0,1) = 0
 
-    leftOverflow = (4 - 1) / 2
-                 = 1.5
+Overflow:
+leftOverflow  = (4 - 1) / 2
+               = 1.5
+rightOverflow = 0
 
-    solve(1,1) = 1.5
+So:
+solve(1,1) = 1.5
 
-Now solve(2,1):
+----------------------------------------------------------
+Now compute solve(2,1)
 
 leftParent  = 1.5
 rightParent = 1.5
@@ -119,13 +154,25 @@ Overflow from each:
 = 0.25
 
 Total:
-
 0.25 + 0.25 = 0.5
 
-Final Answer = 0.5
+----------------------------------------------------------
+Final Check:
 
+Since 0.5 < 1
+Final answer = 0.5
+
+==========================================================
+
+FINAL OUTPUT:
+Champagne in glass = 0.5
+
+==========================================================
 Time Complexity:
 Exponential (Tree Recursion)
 
-==========================
+Space Complexity:
+O(r) recursion stack
+
+==========================================================
 */
