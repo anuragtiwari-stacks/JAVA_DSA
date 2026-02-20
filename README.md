@@ -79,7 +79,7 @@ src/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ANURAG12112004/JAVA_PW.git
+   git clone https://github.com/anuragtiwari-stacks/JAVA_DSA.git
    ```
 
 2. Open in **IntelliJ IDEA**
