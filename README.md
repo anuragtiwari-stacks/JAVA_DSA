@@ -1,4 +1,4 @@
-# JAVA_PW – Java DSA Repository 🚀
+# Java DSA Repository 🚀
 
 A **comprehensive Java Data Structures & Algorithms (DSA) repository**, structured topic-wise for **learning, practice, revision, and interview preparation**.
 
@@ -10,15 +10,15 @@ This repository contains **well-organized Java implementations** of core DSA con
 
 ```text
 src/
-├── _1Array                     → Array problems
-├── _2String                    → String problems
-├── _3LinkedList              → Linked List (Basics, Methods, PW)
-├── _4Stack                   → Stack (Basics & Questions)
-├── _5Queue                   → Queue & Deque
-├── _6Tree                    → Binary Tree & BST
-├── _7Hashing                 → HashSet, HashMap, TreeMap
-├── _8Heap                    → Heap (Min/Max Heap & Problems)
-├── _9Graph                   → Graph (BFS, DFS, Shortest Paths)
+├── _01Array                     → Array problems
+├── _02String                    → String problems
+├── _03LinkedList              → Linked List (Basics, Methods, PW)
+├── _04Stack                   → Stack (Basics & Questions)
+├── _05Queue                   → Queue & Deque
+├── _06Tree                    → Binary Tree & BST
+├── _07Hashing                 → HashSet, HashMap, TreeMap
+├── _08Heap                    → Heap (Min/Max Heap & Problems)
+├── _09Graph                   → Graph (BFS, DFS, Shortest Paths)
 ├── _10PrefixSum               → Prefix Sum techniques
 ├── _11BitManipulation         → Bit Manipulation
 ├── _12SlidingWindow           → Sliding Window problems
@@ -34,26 +34,6 @@ src/
 
 ```
 
----
-
-## 🧠 Topics Covered
-
-* Arrays & Strings
-* Linked List
-* Stack & Queue
-* Trees (Binary Tree & BST)
-* Hashing
-* Heap (Priority Queue)
-* Graphs (BFS, DFS, Dijkstra, MST, etc.)
-* Prefix Sum
-* Sliding Window
-* Searching & Sorting
-* Bit Manipulation
-* Recursion & Backtracking
-* Greedy Algorithms
-* Tries
-* Segment Tree
-* Dynamic Programming
 
 ---
 
