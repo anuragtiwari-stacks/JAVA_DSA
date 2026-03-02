@@ -27,11 +27,8 @@ public class _5LongestSubarrayAfterDeletion_BruteForce
                 }
 
                 // length after deleting one element
-                int currentLength = j - i;
-                if (currentLength > maxLen)
-                {
-                    maxLen = currentLength;
-                }
+                int currentLength = (j-i+1) - 1;
+                maxLen = Math.max(maxLen,currentLength);
             }
         }
 
@@ -67,14 +64,14 @@ Example:
 nums = [1, 1, 0, 1]
 
 i = 0:
- j = 0 → [1], zeroCount = 0 → length = 0
- j = 1 → [1,1], zeroCount = 0 → length = 1
+ j = 0 → [1], zeroCount = 0
+ j = 1 → [1,1], zeroCount = 0
  j = 2 → [1,1,0], zeroCount = 1 → length = 2
  j = 3 → [1,1,0,1], zeroCount = 1 → length = 3
  maxLen = 3
 
 i = 1:
- j = 1 → [1], zeroCount = 0 → length = 0
+ j = 1 → [1], zeroCount = 0
  j = 2 → [1,0], zeroCount = 1 → length = 1
  j = 3 → [1,0,1], zeroCount = 1 → length = 2
 
@@ -83,7 +80,7 @@ i = 2:
  j = 3 → [0,1], zeroCount = 1 → length = 1
 
 i = 3:
- j = 3 → [1], zeroCount = 0 → length = 0
+ j = 3 → [1], zeroCount = 0
 
 Final Answer = 3
 

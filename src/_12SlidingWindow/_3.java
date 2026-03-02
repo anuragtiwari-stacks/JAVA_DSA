@@ -33,7 +33,6 @@ public class _3
                 if (sum >= target)
                 {
                     minLength = Math.min(minLength, end - start + 1);
-                    break;
                 }
             }
         }

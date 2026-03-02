@@ -2,28 +2,24 @@ package _12SlidingWindow;
 
 public class _3MinSizeSubarraySum
 {
-
     public int minSubArrayLen(int target, int[] nums)
     {
         int n = nums.length;
-        int i = 0;
-        int windowSum = 0;
         int minLength = Integer.MAX_VALUE;
 
-        for (int j = 0; j < n; j++)
+        for (int i = 0; i < n; i++)
         {
-            windowSum = windowSum + nums[j];
+            int windowSum = 0;  // reset for every i
 
-            while (windowSum >= target)
+            for (int j = i; j < n; j++)
             {
-                int currentLength = j - i + 1;
-                if (currentLength < minLength)
-                {
-                    minLength = currentLength;
-                }
+                windowSum = windowSum + nums[j];
 
-                windowSum = windowSum - nums[i];
-                i++;
+                if (windowSum >= target)
+                {
+                    minLength = Math.min(minLength, j - i + 1);
+                    break;  // no need to continue further
+                }
             }
         }
 
@@ -31,8 +27,10 @@ public class _3MinSizeSubarraySum
         {
             return 0;
         }
-
-        return minLength;
+        else
+        {
+            return minLength;
+        }
     }
 
     public static void main(String[] args)

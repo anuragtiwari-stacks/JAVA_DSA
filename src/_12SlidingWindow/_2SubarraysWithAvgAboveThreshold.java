@@ -67,3 +67,105 @@ public class _2SubarraysWithAvgAboveThreshold
     }
 
 }
+
+/*
+DRY RUN
+
+Input:
+arr = [2,2,2,2,5,5,5,8]
+k = 3
+threshold = 4
+
+Step 1:
+targetSum = k * threshold
+targetSum = 3 * 4 = 12
+
+We need subarrays of size 3 whose sum >= 12
+
+-------------------------------------------------
+
+Initial Window (First k elements)
+
+i = 0
+j = 2
+
+Window = [2,2,2]
+
+windowSum = 2 + 2 + 2 = 6
+
+Check:
+6 >= 12 ? NO
+count = 0
+
+-------------------------------------------------
+
+Slide Window
+
+i = 1
+j = 3
+
+New windowSum = previousSum + arr[j] - arr[i-1]
+windowSum = 6 + 2 - 2 = 6
+
+Window = [2,2,2]
+
+6 >= 12 ? NO
+count = 0
+
+-------------------------------------------------
+
+i = 2
+j = 4
+
+windowSum = 6 + 5 - 2 = 9
+
+Window = [2,2,5]
+
+9 >= 12 ? NO
+count = 0
+
+-------------------------------------------------
+
+i = 3
+j = 5
+
+windowSum = 9 + 5 - 2 = 12
+
+Window = [2,5,5]
+
+12 >= 12 ? YES
+count = 1
+
+-------------------------------------------------
+
+i = 4
+j = 6
+
+windowSum = 12 + 5 - 2 = 15
+
+Window = [5,5,5]
+
+15 >= 12 ? YES
+count = 2
+
+-------------------------------------------------
+
+i = 5
+j = 7
+
+windowSum = 15 + 8 - 5 = 18
+
+Window = [5,5,8]
+
+18 >= 12 ? YES
+count = 3
+
+-------------------------------------------------
+
+j = 8 (Stop because j == n)
+
+Final Answer:
+count = 3
+
+=================================================
+*/
