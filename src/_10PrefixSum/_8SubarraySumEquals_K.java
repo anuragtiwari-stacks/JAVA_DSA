@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class _8SubarraySumEquals_K
 {
-
     // Method to count subarrays whose sum equals k
     public static int subarraySum(int[] nums, int k)
     {
