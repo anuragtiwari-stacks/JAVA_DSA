@@ -14,7 +14,7 @@ package _07Hashing._2HashMap;
 
 import java.util.HashMap;
 
-public class _2ValidAnagram
+public class _4ValidAnagram
 {
     public static boolean isAnagram(String s, String t)
     {

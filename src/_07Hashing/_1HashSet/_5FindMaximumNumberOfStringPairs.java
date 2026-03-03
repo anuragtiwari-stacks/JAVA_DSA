@@ -29,8 +29,8 @@ public class _5FindMaximumNumberOfStringPairs
 
             if (set.contains(reversed))
             {
-                pairs++;
                 set.remove(reversed);
+                pairs++;
             }
             else
             {

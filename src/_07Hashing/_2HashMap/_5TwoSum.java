@@ -9,7 +9,7 @@ package _07Hashing._2HashMap;
 
 import java.util.HashMap;
 
-public class _3TwoSum
+public class _5TwoSum
 {
     public static int[] twoSum(int[] nums, int target)
     {

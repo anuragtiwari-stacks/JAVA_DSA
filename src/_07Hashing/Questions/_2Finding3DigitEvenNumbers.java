@@ -1,161 +1,166 @@
-/*
-2094. Finding 3-Digit Even Numbers
-
-Find all unique 3-digit even numbers using HashMap
-*/
-
 package _07Hashing.Questions;
 
-import java.util.HashMap;
-import java.util.ArrayList;
+/*
+2094. Finding 3-Digit Even Numbers
+*/
+
+import java.util.*;
 
 public class _2Finding3DigitEvenNumbers
 {
-    public static int[] findEvenNumbers(int[] digits)
-    {
-        HashMap<Integer, Integer> map = new HashMap<>();
 
-        // Step 1: Count frequency of each digit
+    public int[] findEvenNumbers(int[] digits)
+    {
+
+        List<Integer> list = new ArrayList<>();
+
+        HashMap<Integer, Integer> freq = new HashMap<>();
+
+        // Step 1: Count frequency of digits
         for (int d : digits)
         {
-            if (map.containsKey(d))
+
+            if (freq.containsKey(d))
             {
-                map.put(d, map.get(d) + 1);
+                freq.put(d, freq.get(d) + 1);
             }
             else
             {
-                map.put(d, 1);
+                freq.put(d, 1);
             }
+
         }
 
-        ArrayList<Integer> list = new ArrayList<>();
-
         // Step 2: Check all 3-digit even numbers
-        for (int num = 100; num <= 999; num++)
+        for (int num = 100; num <= 998; num += 2)
         {
-            if (num % 2 != 0)
-            {
-                continue;
-            }
 
             int a = num / 100;
             int b = (num / 10) % 10;
             int c = num % 10;
 
-            boolean possible = true;
+            HashMap<Integer, Integer> temp = new HashMap<>();
 
-            // copy original map
-            HashMap<Integer, Integer> copy = new HashMap<>(map);
-
-            // check digit a
-            if (!copy.containsKey(a) || copy.get(a) == 0)
+            if (temp.containsKey(a))
             {
-                possible = false;
+                temp.put(a, temp.get(a) + 1);
             }
             else
             {
-                copy.put(a, copy.get(a) - 1);
+                temp.put(a, 1);
             }
 
-            // check digit b
-            if (possible)
+            if (temp.containsKey(b))
             {
-                if (!copy.containsKey(b) || copy.get(b) == 0)
-                {
-                    possible = false;
-                }
-                else
-                {
-                    copy.put(b, copy.get(b) - 1);
-                }
+                temp.put(b, temp.get(b) + 1);
             }
-
-            // check digit c
-            if (possible)
+            else
             {
-                if (!copy.containsKey(c) || copy.get(c) == 0)
-                {
-                    possible = false;
-                }
-                else
-                {
-                    copy.put(c, copy.get(c) - 1);
-                }
+                temp.put(b, 1);
             }
 
-            if (possible)
+            if (temp.containsKey(c))
+            {
+                temp.put(c, temp.get(c) + 1);
+            }
+            else
+            {
+                temp.put(c, 1);
+            }
+
+            boolean valid = true;
+
+            for (int key : temp.keySet())
+            {
+
+                if (!freq.containsKey(key) || temp.get(key) > freq.get(key))
+                {
+                    valid = false;
+                    break;
+                }
+
+            }
+
+            if (valid)
             {
                 list.add(num);
             }
+
         }
 
-        // Step 3: Convert list to array
-        int[] result = new int[list.size()];
+        int[] ans = new int[list.size()];
 
         for (int i = 0; i < list.size(); i++)
         {
-            result[i] = list.get(i);
+            ans[i] = list.get(i);
         }
 
-        return result;
+        return ans;
+
     }
 
+    // 🔥 IDE runnable main method
     public static void main(String[] args)
     {
+
+        _2Finding3DigitEvenNumbers obj = new _2Finding3DigitEvenNumbers();
+
         int[] digits = {2, 1, 3, 0};
 
-        int[] ans = findEvenNumbers(digits);
+        int[] result = obj.findEvenNumbers(digits);
 
-        for (int x : ans)
-        {
-            System.out.print(x + " ");
-        }
+        System.out.println(Arrays.toString(result));
+
+        // Output:
+        // [102, 120, 130, 132, 210, 230, 302, 310, 312, 320]
+
     }
+
 }
 
+
 /*
+==================== FULL DRY RUN ====================
+
 Input:
 digits = [2, 1, 3, 0]
 
-Step 1: Frequency Map
-map = {0=1, 1=1, 2=1, 3=1}
+------------------------------------------------------
+Step 1: Frequency map
 
-----------------------------------
-Step 2: Check even numbers
+freq = {2=1, 1=1, 3=1, 0=1}
 
-num = 120
-a=1, b=2, c=0
-copy = {0=1, 1=1, 2=1, 3=1}
+------------------------------------------------------
+Step 2: Check numbers 100 to 998 (even only)
 
-use 1 → copy {1=0}
-use 2 → copy {2=0}
-use 0 → copy {0=0}
+Example → 132
 
-possible = true → add 120
+Digits:
+1, 3, 2
 
-----------------------------------
-num = 210
-a=2, b=1, c=0
-all available → add 210
+temp = {1=1, 3=1, 2=1}
 
-----------------------------------
-num = 230
-a=2, b=3, c=0
-all available → add 230
+Compare with freq:
+Valid ✔ → Add
 
-----------------------------------
-num = 222
-a=2, b=2, c=2
-need 3 copies of 2 but only 1 available
-possible = false → reject
+------------------------------------------------------
 
-----------------------------------
-num = 320
-a=3, b=2, c=0
-all available → add 320
+Example → 222
 
-----------------------------------
-Final List:
-[120, 210, 230, 320]
+Digits:
+2, 2, 2
 
- */
+temp = {2=3}
+
+Compare:
+3 > 1 ❌
+
+Invalid → Skip
+
+------------------------------------------------------
+
+Final Output:
+[102, 120, 130, 132, 210, 230, 302, 310, 312, 320]
+
+======================================================
+*/

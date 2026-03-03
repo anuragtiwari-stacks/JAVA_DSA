@@ -21,11 +21,6 @@ public class _4CheckIfArrayPairsAreDivisibleByK
         {
             int rem = num % k;
 
-            if (rem < 0)
-            {
-                rem = rem + k;
-            }
-
             if (map.containsKey(rem))
             {
                 map.put(rem, map.get(rem) + 1);

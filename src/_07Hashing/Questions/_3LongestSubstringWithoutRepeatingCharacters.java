@@ -1,154 +1,181 @@
+package _07Hashing.Questions;
+
 /*
 3. Longest Substring Without Repeating Characters
 
-Given a string s, find the length of the longest substring
-without repeating characters.
+Given a string s, find the length of the longest
+substring without repeating characters.
 */
 
-package _07Hashing.Questions;
-
-import java.util.HashMap;
+import java.util.*;
 
 public class _3LongestSubstringWithoutRepeatingCharacters
 {
-    public static int lengthOfLongestSubstring(String s)
+
+    public int lengthOfLongestSubstring(String s)
     {
-        HashMap<Character, Integer> map = new HashMap<>();
+
+        HashSet<Character> set = new HashSet<>();
 
         int left = 0;
         int maxLength = 0;
 
         for (int right = 0; right < s.length(); right++)
         {
-            char ch = s.charAt(right);
 
-            if (map.containsKey(ch) && map.get(ch) >= left)
+            while (set.contains(s.charAt(right)))
             {
-                left = map.get(ch) + 1;
+                set.remove(s.charAt(left));
+                left++;
             }
 
-            map.put(ch, right);
+            set.add(s.charAt(right));
 
             maxLength = Math.max(maxLength, right - left + 1);
+
         }
 
         return maxLength;
+
     }
 
+
+    // 🔥 IDE Runnable Main
     public static void main(String[] args)
     {
-        String s1 = "abcabcbb";
-        String s2 = "bbbbb";
 
-        System.out.println(lengthOfLongestSubstring(s1));
-        System.out.println(lengthOfLongestSubstring(s2));
+        _3LongestSubstringWithoutRepeatingCharacters obj =
+                new _3LongestSubstringWithoutRepeatingCharacters();
+
+        String s = "abcabcbb";
+
+        int result = obj.lengthOfLongestSubstring(s);
+
+        System.out.println(result);
+
+        // Output:
+        // 3
+
     }
+
 }
+
 
 /*
 ==================== FULL DRY RUN ====================
 
-Example 1:
+Input:
 s = "abcabcbb"
 
-Initial:
-map = {}
+------------------------------------------------------
+Initial State:
+
 left = 0
 maxLength = 0
+set = {}
 
-----------------------------------------------------
-right = 0, ch = 'a'
-'a' not in map
-put ('a', 0)
-window = [0..0] → "a"
+------------------------------------------------------
+
+right = 0 → 'a'
+set = {a}
 length = 1
 maxLength = 1
 
-----------------------------------------------------
-right = 1, ch = 'b'
-'b' not in map
-put ('b', 1)
-window = [0..1] → "ab"
+------------------------------------------------------
+
+right = 1 → 'b'
+set = {a, b}
 length = 2
 maxLength = 2
 
-----------------------------------------------------
-right = 2, ch = 'c'
-'c' not in map
-put ('c', 2)
-window = [0..2] → "abc"
+------------------------------------------------------
+
+right = 2 → 'c'
+set = {a, b, c}
 length = 3
 maxLength = 3
 
-----------------------------------------------------
-right = 3, ch = 'a'
-'a' found in map at index 0
-0 >= left(0) → true
+------------------------------------------------------
 
-move left:
-left = 0 + 1 = 1
+right = 3 → 'a' (repeat)
 
-put ('a', 3)
-window = [1..3] → "bca"
+Remove 'a'
+left = 1
+set = {b, c}
+
+Add 'a'
+set = {b, c, a}
 length = 3
 maxLength = 3
 
-----------------------------------------------------
-right = 4, ch = 'b'
-'b' found at index 1
-1 >= left(1) → true
+------------------------------------------------------
 
-left = 1 + 1 = 2
+right = 4 → 'b' (repeat)
 
-put ('b', 4)
-window = [2..4] → "cab"
+Remove 'b'
+left = 2
+set = {c, a}
+
+Add 'b'
+set = {c, a, b}
 length = 3
 maxLength = 3
 
-----------------------------------------------------
-right = 5, ch = 'c'
-'c' found at index 2
-2 >= left(2) → true
+------------------------------------------------------
 
-left = 2 + 1 = 3
+right = 5 → 'c' (repeat)
 
-put ('c', 5)
-window = [3..5] → "abc"
+Remove 'c'
+left = 3
+set = {a, b}
+
+Add 'c'
+set = {a, b, c}
 length = 3
 maxLength = 3
 
-----------------------------------------------------
-right = 6, ch = 'b'
-'b' found at index 4
-4 >= left(3) → true
+------------------------------------------------------
 
-left = 4 + 1 = 5
+right = 6 → 'b' (repeat)
 
-put ('b', 6)
-window = [5..6] → "cb"
+Remove 'a'
+left = 4
+set = {b, c}
+
+Still repeat
+
+Remove 'b'
+left = 5
+set = {c}
+
+Add 'b'
+set = {c, b}
 length = 2
 maxLength = 3
 
-----------------------------------------------------
-right = 7, ch = 'b'
-'b' found at index 6
-6 >= left(5) → true
+------------------------------------------------------
 
-left = 6 + 1 = 7
+right = 7 → 'b' (repeat)
 
-put ('b', 7)
-window = [7..7] → "b"
+Remove 'c'
+left = 6
+set = {b}
+
+Still repeat
+
+Remove 'b'
+left = 7
+set = {}
+
+Add 'b'
+set = {b}
 length = 1
 maxLength = 3
 
-Final Answer = 3
-----------------------------------------------------
+------------------------------------------------------
 
-Example 2:
-s = "bbbbb"
+Final Answer:
+3
 
-Every time duplicate comes, left moves forward.
-Longest substring = "b"
-Answer = 1
-====================================================
+======================================================
 */
