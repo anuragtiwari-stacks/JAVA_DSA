@@ -1,8 +1,7 @@
 package _18Recursion;
 
 /*
-QUESTION:
-You are given n disks placed on source rod.
+QUESTION: You are given n disks placed on source rod.
 You have three rods:
 1. Source rod
 2. Helper rod
