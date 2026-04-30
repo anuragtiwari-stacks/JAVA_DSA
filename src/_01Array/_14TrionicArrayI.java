@@ -3,7 +3,6 @@ package _01Array;
 /*
  LeetCode 3637
  Trionic Array I
- File Name: TrionicArrayI.java
 */
 
 public class _14TrionicArrayI

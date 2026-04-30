@@ -67,3 +67,22 @@ Total Cost = 1 + 2 + 3 = 6
 Output:
 6
 */
+
+
+/* FOR MAX
+int firstMax = Integer.MIN_VALUE;
+int secondMax = Integer.MIN_VALUE;
+
+for (int i = 0; i < nums.length; i++)
+{
+    if (nums[i] > firstMax)
+    {
+        secondMax = firstMax;
+        firstMax = nums[i];
+    }
+    else if (nums[i] > secondMax)
+    {
+        secondMax = nums[i];
+    }
+}
+*/

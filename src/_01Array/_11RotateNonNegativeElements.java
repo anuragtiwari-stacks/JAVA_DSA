@@ -8,17 +8,17 @@ public class _11RotateNonNegativeElements
 {
     public static int[] rotateNonNegativeElements(int[] nums, int k)
     {
-        List<Integer> nonNeg = new ArrayList<>();
+        List<Integer> nonNegative = new ArrayList<>();
 
         for(int num : nums)
         {
             if(num >= 0)
             {
-                nonNeg.add(num);
+                nonNegative.add(num);
             }
         }
 
-        int size = nonNeg.size();
+        int size = nonNegative.size();
 
         if(size == 0)
         {
@@ -27,7 +27,7 @@ public class _11RotateNonNegativeElements
 
         k = k % size;
 
-        Collections.rotate(nonNeg, k);
+        Collections.rotate(nonNegative, k);
 
         int idx = 0;
 
@@ -35,7 +35,7 @@ public class _11RotateNonNegativeElements
         {
             if(nums[i] >= 0)
             {
-                nums[i] = nonNeg.get(idx);
+                nums[i] = nonNegative.get(idx);
                 idx++;
             }
         }

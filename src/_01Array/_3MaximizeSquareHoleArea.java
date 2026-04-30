@@ -20,6 +20,7 @@ vBars[] = removed vertical bars
 Return:
 Maximum possible square hole area = side * side
 */
+//-> ISS QUESTION ME DIYA HUA =>> hBars and vBars
 
 public class _3MaximizeSquareHoleArea
 {
