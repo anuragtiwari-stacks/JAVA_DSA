@@ -2,7 +2,6 @@ package _10PrefixSum;
 
 public class _1BuildPrefixSum
 {
-
     // Method to build prefix sum array
     public static int[] buildPrefixSum(int[] arr)
     {

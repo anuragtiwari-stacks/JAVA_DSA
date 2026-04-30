@@ -2,7 +2,7 @@ package _10PrefixSum;
 
 import java.util.Arrays;
 
-public class _6LongestSubsequenceWithLimitedSum
+public class  _6LongestSubsequenceWithLimitedSum
 {
     // Method to find answer for each query
     public static int[] answerQueries(int[] nums, int[] queries)
