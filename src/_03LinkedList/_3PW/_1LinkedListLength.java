@@ -65,3 +65,14 @@ public class _1LinkedListLength
         System.out.println("Length of the linked list (recursive): " + len);
     }
 }
+
+
+// while(temp != null)
+// 👉 traversal continues jab tak temp null na ho jaye
+// 👉 loop NULL pe rukta hai (last node ke baad)
+// 👉 use: printing, length, search (sab nodes visit)
+
+// while(temp.next != null)
+// 👉 traversal continues jab tak next null na ho
+// 👉 loop LAST NODE par rukta hai
+// 👉 use: insert at end, delete last, last node find

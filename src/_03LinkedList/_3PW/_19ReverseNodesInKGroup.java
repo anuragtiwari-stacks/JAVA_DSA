@@ -14,6 +14,7 @@ public class _19ReverseNodesInKGroup
         }
     }
 
+    // Function to reverse nodes in k group
     public static Node reverseKGroup(Node head, int k)
     {
         if (head == null || k == 1)
@@ -21,7 +22,7 @@ public class _19ReverseNodesInKGroup
             return head;
         }
 
-        // Step 1: Check k nodes exist
+        // 🔹 Step 1: Check if k nodes exist
         Node temp = head;
         int count = 0;
 
@@ -31,12 +32,13 @@ public class _19ReverseNodesInKGroup
             count++;
         }
 
+        // If less than k nodes, return as it is
         if (count < k)
         {
-            return head; // less than k nodes
+            return head;
         }
 
-        // Step 2: Reverse k nodes
+        // 🔹 Step 2: Reverse k nodes
         Node prev = null;
         Node current = head;
         Node next = null;
@@ -51,13 +53,14 @@ public class _19ReverseNodesInKGroup
             count++;
         }
 
-        // Step 3: Recursive call for remaining list
+        // 🔹 Step 3: Recursively reverse remaining list
         head.next = reverseKGroup(current, k);
 
-        // prev is new head of reversed group
+        // 🔹 Step 4: Return new head
         return prev;
     }
 
+    // Utility function to print list
     public static void printList(Node head)
     {
         while (head != null)
@@ -79,9 +82,11 @@ public class _19ReverseNodesInKGroup
         System.out.print("Original: ");
         printList(head);
 
-        head = reverseKGroup(head, 2);
+        int k = 2;
 
-        System.out.print("After Reverse in k-Group: ");
+        head = reverseKGroup(head, k);
+
+        System.out.print("After reversing in groups of " + k + ": ");
         printList(head);
     }
 }

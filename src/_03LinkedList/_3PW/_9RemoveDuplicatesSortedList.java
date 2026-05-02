@@ -36,8 +36,13 @@ public class _9RemoveDuplicatesSortedList
     // Remove duplicates from sorted linked list
     public void removeDuplicates()
     {
+        if (head == null)
+        {
+            return;
+        }
+
         Node current = head;
-        while (current != null && current.next != null)
+        while (current.next != null)
         {
             if (current.data == current.next.data)
             {
@@ -45,6 +50,7 @@ public class _9RemoveDuplicatesSortedList
                 current.next = current.next.next;
             }
             else
+
             {
                 current = current.next;
             }

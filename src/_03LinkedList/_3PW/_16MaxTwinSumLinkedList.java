@@ -6,6 +6,7 @@ public class _16MaxTwinSumLinkedList
     {
         int data;
         Node next;
+
         Node(int data)
         {
             this.data = data;
@@ -18,128 +19,80 @@ public class _16MaxTwinSumLinkedList
     public void add(int data)
     {
         Node newNode = new Node(data);
+
         if (head == null)
+        {
             head = newNode;
-        else
-        {
-            Node temp = head;
-            while (temp.next != null)
-                temp = temp.next;
-            temp.next = newNode;
+            return;
         }
+
+        Node temp = head;
+        while (temp.next != null)
+        {
+            temp = temp.next;
+        }
+        temp.next = newNode;
     }
 
-    // Reverse linked list and return new head
-    private Node reverse(Node head)
+    public static Node getLast(Node head, Node stop)
     {
-        Node prev = null;
-        Node curr = head;
-        while (curr != null)
+        Node temp = head;
+
+        while (temp.next != stop)
         {
-            Node next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+            temp = temp.next;
         }
-        return prev;
+
+        return temp;
     }
 
-    // Calculate max twin sum
+    // Max Twin Sum using head + getLast
     public int maxTwinSum()
     {
-        if (head == null)
-            return 0;
+        Node start = head;
+        Node end = null;
 
-        // Find middle (slow & fast)
-        Node slow = head;
-        Node fast = head;
-        while (fast != null && fast.next != null)
+        int max = 0;
+
+        while (start != end && start.next != end)
         {
-            slow = slow.next;
-            fast = fast.next.next;
+            Node last = getLast(head, end);
+
+            int sum = start.data + last.data;
+
+            max = Math.max(max, sum); // using Math.max
+
+            start = start.next;
+            end = last;
         }
 
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-
-        Node firstHalf = head;
-        int maxSum = 0;
-
-        // Calculate max twin sum by traversing both halves
-        while (secondHalf != null)
-        {
-            int sum = firstHalf.data + secondHalf.data;
-            if (sum > maxSum)
-                maxSum = sum;
-
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        // Optional: restore original list
-        // reverse again (not mandatory here)
-
-        return maxSum;
+        return max;
     }
 
-    // Print list for debugging
-    public void printList()
+    // Print list
+    public void print()
     {
         Node temp = head;
         while (temp != null)
         {
-            System.out.print(temp.data + " ");
+            System.out.print(temp.data + " -> ");
             temp = temp.next;
         }
-        System.out.println();
+        System.out.println("NULL");
     }
 
-    // Test
     public static void main(String[] args)
     {
         _16MaxTwinSumLinkedList list = new _16MaxTwinSumLinkedList();
 
-        // Example 1
         list.add(5);
         list.add(4);
-        list.add(2);
         list.add(1);
-        System.out.print("List: ");
-        list.printList();
-        System.out.println("Max Twin Sum: " + list.maxTwinSum());  // Output: 6
+        list.add(2);
 
-        // Example 2
-        _16MaxTwinSumLinkedList list2 = new _16MaxTwinSumLinkedList();
-        list2.add(4);
-        list2.add(2);
-        list2.add(2);
-        list2.add(3);
         System.out.print("List: ");
-        list2.printList();
-        System.out.println("Max Twin Sum: " + list2.maxTwinSum());  // Output: 7
+        list.print();
 
-        // Example 3
-        _16MaxTwinSumLinkedList list3 = new _16MaxTwinSumLinkedList();
-        list3.add(1);
-        list3.add(100000);
-        System.out.print("List: ");
-        list3.printList();
-        System.out.println("Max Twin Sum: " + list3.maxTwinSum());  // Output: 100001
+        System.out.println("Max Twin Sum: " + list.maxTwinSum());
     }
 }
-
-
-/*
-Maximum Twin Sum Concept:
-
-1. Find the middle of the linked list using slow and fast pointers.
-
-2. Reverse the second half of the linked list starting from the middle.
-
-3. Traverse both halves simultaneously and calculate the twin sums.
-
-4. Keep track of the maximum twin sum found during traversal.
-
-5. (Optional) Restore the reversed second half back to original (if needed).
-*/
-

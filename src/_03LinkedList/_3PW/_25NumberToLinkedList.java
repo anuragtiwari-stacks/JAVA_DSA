@@ -98,6 +98,7 @@ Example:
 Number = 1234
 Reverse = 4321
 
-Add normally:
-4 -> 3 -> 2 -> 1 -> NULL
+Add normally
+
+Linked List: 1 -> 2 -> 3 -> 4 -> NULL
 */

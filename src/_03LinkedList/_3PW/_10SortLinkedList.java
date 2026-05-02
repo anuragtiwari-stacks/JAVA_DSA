@@ -14,7 +14,7 @@ public class _10SortLinkedList
         }
     }
 
-    // Function to sort the linked list (Bubble sort)
+    // Bubble Sort
     public static Node sortList(Node head)
     {
         if (head == null || head.next == null)
@@ -22,42 +22,45 @@ public class _10SortLinkedList
             return head;
         }
 
-        Node current = head;
-        while (current != null)
-        {
-            Node index = current.next;
+        Node end = null;
 
-            while (index != null)
+        while (end != head)
+        {
+            Node current = head;
+
+            while (current.next != end)
             {
-                if (current.data > index.data)
+                if (current.data > current.next.data)
                 {
-                    // Swap data
+                    // swap adjacent nodes data
                     int temp = current.data;
-                    current.data = index.data;
-                    index.data = temp;
+                    current.data = current.next.data;
+                    current.next.data = temp;
                 }
-                index = index.next;
+                current = current.next;
             }
 
-            current = current.next;
+            end = current; // last node sorted ho gaya
         }
 
         return head;
     }
 
-    // Utility function to print the list
+    // Print Linked List
     public static void printList(Node head)
     {
         Node temp = head;
+
         while (temp != null)
         {
             System.out.print(temp.data + " -> ");
             temp = temp.next;
         }
+
         System.out.println("NULL");
     }
 
-    // Driver code
+    // Driver Code
     public static void main(String[] args)
     {
         Node head = new Node(4);

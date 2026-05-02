@@ -1,6 +1,6 @@
 package _03LinkedList._3PW;
 
-public class _30FlattenMultilevelDLL_ImageLogic
+public class _30FlattenMultilevelDLL
 {
     static class Node
     {

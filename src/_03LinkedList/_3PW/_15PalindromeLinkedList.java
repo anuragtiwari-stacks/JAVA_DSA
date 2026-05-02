@@ -37,7 +37,7 @@ public class _15PalindromeLinkedList
         Node start = head;
         Node end = null;
 
-        while (start != end)
+        while (start != end && start.next != end)
         {
             Node last = getLast(head, end);
 
