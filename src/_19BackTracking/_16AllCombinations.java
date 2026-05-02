@@ -1,10 +1,8 @@
 package _19BackTracking;
 
-package _01ARRAY_1D._19Combinations;
-
 import java.util.*;
 
-public class _16Combinations
+public class _16AllCombinations
 {
     public static void generate(int[] arr, int r, int index, ArrayList<Integer> current)
     {

@@ -15,9 +15,9 @@ public class _4CheckIfAStringContainsAllBinaryCodesOfSizeK
 
         int k_length = (int)Math.pow(2, k);
 
-        for (int i = k; i <= n; i++)
+        for (int i = 0; i <= n-k; i++)
         {
-            String sub = s.substring(i - k, i);
+            String sub = s.substring(i, i+k);
 
             if (!set.contains(sub))
             {

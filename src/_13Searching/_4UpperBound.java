@@ -14,7 +14,7 @@ public class _4UpperBound
 
             if (arr[mid] > x)
             {
-                ub = Math.min(ub, mid); // Candidate for upper bound
+                ub = mid; // Candidate for upper bound
                 hi = mid - 1;           // Try earlier
             }
             else
