@@ -3,7 +3,7 @@ package _08Heap.Questions;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class _11MaximumSumDistinctSubarray
+public class _10MaximumSumDistinctSubarray
 {
     public int maximumSubarraySum(int[] nums, int k)
     {

@@ -16,12 +16,12 @@ public class _1KthSmallestElement_MinHeap
 
         int result = -1;
 
-        for (int i = 1; i <= k; i++)
+        for (int i = 1; i < k; i++)
         {
-            result = minHeap.remove();
+            minHeap.remove();
         }
 
-        return result;
+        return minHeap.peek();
 
     }
 

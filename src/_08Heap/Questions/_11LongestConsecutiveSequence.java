@@ -2,7 +2,7 @@ package _08Heap.Questions;
 
 import java.util.HashSet;
 
-public class _12LongestConsecutiveSequence
+public class _11LongestConsecutiveSequence
 {
     public int longestConsecutive(int[] nums)
     {
