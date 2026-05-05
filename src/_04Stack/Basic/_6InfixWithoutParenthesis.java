@@ -13,11 +13,6 @@ public class _6InfixWithoutParenthesis
         {
             char ch = s.charAt(i);
 
-            if (ch == ' ')
-            {
-                continue;
-            }
-
             if (Character.isDigit(ch))
             {
                 numStack.push(ch - '0');
@@ -42,14 +37,14 @@ public class _6InfixWithoutParenthesis
 
     private static void solve(Stack<Integer> nums, Stack<Character> ops)
     {
-        int v2 = nums.pop();
         int v1 = nums.pop();
+        int v2 = nums.pop();
         char op = ops.pop();
 
-        if (op == '+') nums.push(v1 + v2);
-        else if (op == '-') nums.push(v1 - v2);
-        else if (op == '*') nums.push(v1 * v2);
-        else if (op == '/') nums.push(v1 / v2);
+        if (op == '+') nums.push(v2 + v1);
+        else if (op == '-') nums.push(v2 - v1);
+        else if (op == '*') nums.push(v2 * v1);
+        else if (op == '/') nums.push(v2 / v1);
     }
 
     private static int precedence(char op)
