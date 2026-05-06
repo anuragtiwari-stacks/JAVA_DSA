@@ -22,7 +22,7 @@ public class _10StockSpanStack
             {
                 span[i] = i + 1;
             }
-            else
+            else  //prices[stack.peek()] > prices[i])
             {
                 span[i] = i - stack.peek();
             }
