@@ -55,8 +55,8 @@ public class _10MaximumSumDistinctSubarray
 
     public static void main(String[] args)
     {
-        _11MaximumSumDistinctSubarray obj =
-                new _11MaximumSumDistinctSubarray();
+        _10MaximumSumDistinctSubarray obj =
+                new _10MaximumSumDistinctSubarray();
 
         int[] nums = {3, 5, 3, 4};
         int k = 2;

@@ -37,7 +37,7 @@ public class _11LongestConsecutiveSequence
 
     public static void main(String[] args)
     {
-        _12LongestConsecutiveSequence obj = new _12LongestConsecutiveSequence();
+        _11LongestConsecutiveSequence obj = new _11LongestConsecutiveSequence();
 
         int[] nums = {100, 4, 200, 1, 3, 2};
 
