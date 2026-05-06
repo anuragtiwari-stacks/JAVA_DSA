@@ -9,23 +9,29 @@ public class _7RevealCard
         Arrays.sort(deck);
 
         int n = deck.length;
+
         int[] result = new int[n];
 
-        Deque<Integer> dq = new LinkedList<>();
+        Queue<Integer> q = new LinkedList<>();
 
+        // Store indices in queue
         for (int i = 0; i < n; i++)
         {
-            dq.offer(i);
+            q.add(i);
         }
 
+        // Place cards
         for (int card : deck)
         {
-            int idx = dq.pollFirst();
+            // Take front index
+            int idx = q.remove();
+
             result[idx] = card;
 
-            if (!dq.isEmpty())
+            // Move next front to back
+            if (!q.isEmpty())
             {
-                dq.offerLast(dq.pollFirst());
+                q.add(q.remove());
             }
         }
 
@@ -38,11 +44,7 @@ public class _7RevealCard
 
         int[] ans = deckRevealedIncreasing(deck);
 
-        System.out.println("Result:");
-        for (int x : ans)
-        {
-            System.out.print(x + " ");
-        }
+        System.out.println(Arrays.toString(ans));
     }
 }
 
@@ -52,63 +54,146 @@ public class _7RevealCard
 Input:
 deck = [17,13,11,2,3,5,7]
 
-Step 1: Sort deck
+------------------------------------------------
+Step 1: Sort the deck
+------------------------------------------------
+
 deck = [2,3,5,7,11,13,17]
 
-Step 2: Initialize deque with indices
-dq = [0,1,2,3,4,5,6]
+------------------------------------------------
+Step 2: Put all indices in queue
+------------------------------------------------
 
---------------------------------------------
+q = [0,1,2,3,4,5,6]
 
+result = [_,_,_,_,_,_,_]
+
+================================================
 card = 2
-idx = 0 → result[0] = 2
-dq = [1,2,3,4,5,6]
-move front to back → dq = [2,3,4,5,6,1]
+================================================
 
---------------------------------------------
+idx = q.remove() = 0
 
+result[0] = 2
+
+result = [2,_,_,_,_,_,_]
+
+Queue after remove:
+q = [1,2,3,4,5,6]
+
+Move front to back:
+
+q.remove() = 1
+q.add(1)
+
+q = [2,3,4,5,6,1]
+
+================================================
 card = 3
-idx = 2 → result[2] = 3
-dq = [3,4,5,6,1]
-move → dq = [4,5,6,1,3]
+================================================
 
---------------------------------------------
+idx = q.remove() = 2
 
+result[2] = 3
+
+result = [2,_,3,_,_,_,_]
+
+q = [3,4,5,6,1]
+
+Move front to back:
+
+remove() = 3
+add(3)
+
+q = [4,5,6,1,3]
+
+================================================
 card = 5
-idx = 4 → result[4] = 5
-dq = [5,6,1,3]
-move → dq = [6,1,3,5]
+================================================
 
---------------------------------------------
+idx = q.remove() = 4
 
+result[4] = 5
+
+result = [2,_,3,_,5,_,_]
+
+q = [5,6,1,3]
+
+Move:
+
+remove() = 5
+add(5)
+
+q = [6,1,3,5]
+
+================================================
 card = 7
-idx = 6 → result[6] = 7
-dq = [1,3,5]
-move → dq = [3,5,1]
+================================================
 
---------------------------------------------
+idx = q.remove() = 6
 
+result[6] = 7
+
+result = [2,_,3,_,5,_,7]
+
+q = [1,3,5]
+
+Move:
+
+remove() = 1
+add(1)
+
+q = [3,5,1]
+
+================================================
 card = 11
-idx = 3 → result[3] = 11
-dq = [5,1]
-move → dq = [1,5]
+================================================
 
---------------------------------------------
+idx = q.remove() = 3
 
+result[3] = 11
+
+result = [2,_,3,11,5,_,7]
+
+q = [5,1]
+
+Move:
+
+remove() = 5
+add(5)
+
+q = [1,5]
+
+================================================
 card = 13
-idx = 1 → result[1] = 13
-dq = [5]
-(no move)
+================================================
 
---------------------------------------------
+idx = q.remove() = 1
 
+result[1] = 13
+
+result = [2,13,3,11,5,_,7]
+
+q = [5]
+
+(No move because only one element left)
+
+================================================
 card = 17
-idx = 5 → result[5] = 17
-dq = []
+================================================
 
---------------------------------------------
+idx = q.remove() = 5
 
-Final Result:
+result[5] = 17
+
+result = [2,13,3,11,5,17,7]
+
+q = []
+
+================================================
+FINAL ANSWER
+================================================
+
 [2,13,3,11,5,17,7]
 
 ================================================
