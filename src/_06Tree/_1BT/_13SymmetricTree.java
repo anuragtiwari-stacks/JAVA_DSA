@@ -35,24 +35,34 @@ public class _13SymmetricTree
         return isMirror(root.left, root.right);
     }
 
-    boolean isMirror(Node left, Node right)
+    // Mirror checking
+    public static boolean isMirror(Node p, Node q)
     {
-        if (left == null && right == null)
+        // Both null
+        if(p == null && q == null)
         {
             return true;
         }
 
-        if (left == null || right == null)
+        // One null
+        if((p == null && q != null) ||
+                (p != null && q == null))
         {
             return false;
         }
 
-        if (left.data != right.data)
+        // Data mismatch
+        if(p.data != q.data)
         {
             return false;
         }
 
-        return isMirror(left.left, right.right) && isMirror(left.right, right.left);
+        // Check outer and inner
+        boolean outer = isMirror(p.left, q.right);
+
+        boolean inner = isMirror(p.right, q.left);
+
+        return outer && inner;
     }
 
     public static void main(String[] args)

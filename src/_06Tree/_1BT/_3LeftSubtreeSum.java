@@ -38,14 +38,17 @@ public class _3LeftSubtreeSum
         return node.data + leftSum + rightSum;
     }
 
-    int leftSubtreeSum(Node root)
+    int leftSubtreeSum(Node node)
     {
-        if (root == null || root.left == null)
+        if (node == null)
         {
             return 0;
         }
 
-        return sumOfTree(root.left);
+        int leftSum = sumOfTree(node.left);
+        int rightSum = sumOfTree(node.right);
+
+        return node.data + leftSum + rightSum;
     }
 
     public static void main(String[] args)
@@ -68,7 +71,7 @@ public class _3LeftSubtreeSum
         System.out.println();
 
         int totalSum = tree.sumOfTree(a);
-        int leftSum = tree.leftSubtreeSum(a);
+        int leftSum = tree.leftSubtreeSum(a.left);
 
         System.out.println("Total sum of all nodes: " + totalSum);
         System.out.println("Sum of left subtree: " + leftSum);

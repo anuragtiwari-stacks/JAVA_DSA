@@ -15,21 +15,30 @@ public class _12SameTree
 
     boolean isSameTree(Node p, Node q)
     {
-        if (p == null && q == null)
+        // Both null
+        if(p == null && q == null)
         {
             return true;
         }
 
-        if (p == null || q == null)
+        // Only one null
+        if((p == null && q != null) ||
+                (p != null && q == null))
         {
             return false;
         }
 
-        if (p.data != q.data)
+        // Both are not null
+        if(p != null && q != null)
         {
-            return false;
+            // Data mismatch
+            if(p.data != q.data)
+            {
+                return false;
+            }
         }
 
+        // Check left and right subtree
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 

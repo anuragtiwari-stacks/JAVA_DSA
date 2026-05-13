@@ -14,23 +14,31 @@ public class _15PathSumExists
         }
     }
 
-    public boolean hasPathSum(Node root, int targetSum)
+    public static boolean hasPathSum(Node root, int targetSum)
     {
-        if (root == null)
+        // Null node
+        if(root == null)
         {
             return false;
         }
 
-        if (root.left == null && root.right == null)
+        // Leaf node
+        if(root.left == null && root.right == null)
         {
-            return root.data == targetSum;
-            // At a leaf node,
-            // we check whether the remaining target sum exactly matches the leaf value
+            return targetSum == root.data;
         }
 
-        int remaining = targetSum - root.data;
+        // Remaining target
+        int remainingSum = targetSum - root.data;
 
-        return hasPathSum(root.left, remaining) || hasPathSum(root.right, remaining);
+        // Check left subtree
+        boolean left = hasPathSum(root.left, remainingSum);
+
+        // Check right subtree
+        boolean right = hasPathSum(root.right, remainingSum);
+
+        // Any one path true
+        return left || right;
     }
 
     public static void main(String[] args)

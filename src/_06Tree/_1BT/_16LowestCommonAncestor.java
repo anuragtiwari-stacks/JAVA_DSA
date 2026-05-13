@@ -84,7 +84,7 @@ TREE DIAGRAM
        / \
       7   4
 
-DRY RUN (only one example)
+DRY RUN
 
 Find LCA of nodes 7 and 8
 

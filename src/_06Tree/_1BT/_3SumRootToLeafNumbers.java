@@ -2,7 +2,7 @@ package _06Tree._1BT;
 
 public class _3SumRootToLeafNumbers
 {
-    public static class TreeNode
+    static class TreeNode
     {
         int val;
         TreeNode left;
@@ -14,113 +14,57 @@ public class _3SumRootToLeafNumbers
         }
     }
 
-    int totalSum = 0;
-
-    int sumNumbers(TreeNode root)
+    // Function to calculate sum
+    public static int sumNumbers(TreeNode root)
     {
-        traverse(root, 0);
-        return totalSum;
+        return helper(root, 0);
     }
 
-    void traverse(TreeNode node, int current)
+    public static int helper(TreeNode node, int current)
     {
-        if (node == null)
+        // Base Case
+        if(node == null)
         {
-            return;
+            return 0;
         }
 
+        // Create current number
         current = current * 10 + node.val;
 
-        if (node.left == null && node.right == null)
+        // Leaf node
+        if(node.left == null && node.right == null)
         {
-            totalSum += current;
-            return;
+            return current;
         }
 
-        traverse(node.left, current);
-        traverse(node.right, current);
+        // Left subtree sum
+        int leftSum = helper(node.left, current);
+
+        // Right subtree sum
+        int rightSum = helper(node.right, current);
+
+        return leftSum + rightSum;
     }
 
     public static void main(String[] args)
     {
-        _3SumRootToLeafNumbers tree = new _3SumRootToLeafNumbers();
-
         /*
-            TREE CREATION:
+                1
+               / \
+              2   3
 
-                    1
-                   / \
-                  2   3
+            Numbers:
+            12
+            13
 
-            Root → Leaf paths:
-            1 → 2  = 12
-            1 → 3  = 13
+            Sum = 25
         */
 
         TreeNode root = new TreeNode(1);
+
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
 
-        int result = tree.sumNumbers(root);
-        System.out.println("Sum of Root to Leaf Numbers: " + result);
+        System.out.println(sumNumbers(root));
     }
 }
-
-/*
-===========================
-PROPER DRY RUN
-===========================
-
-Tree:
-
-        1
-       / \
-      2   3
-
---------------------------------
-Initial values:
-totalSum = 0
-
---------------------------------
-Call: sumNumbers(root)
-
-→ traverse(node = 1, current = 0)
-
-current = 0 * 10 + 1 = 1
-
---------------------------------
-Go LEFT:
-→ traverse(node = 2, current = 1)
-
-current = 1 * 10 + 2 = 12
-
-Node 2 is LEAF
-→ totalSum = 0 + 12 = 12
-→ return
-
---------------------------------
-Go RIGHT:
-→ traverse(node = 3, current = 1)
-
-current = 1 * 10 + 3 = 13
-
-Node 3 is LEAF
-→ totalSum = 12 + 13 = 25
-→ return
-
---------------------------------
-Traversal finished
-
-Return totalSum = 25
-
---------------------------------
-FINAL OUTPUT:
-Sum of Root to Leaf Numbers: 25
---------------------------------
-
-INTERVIEW POINT:
-- DFS traversal
-- Carry number using current * 10 + value
-- Add only at leaf node
-- Global variable used to store result
-*/

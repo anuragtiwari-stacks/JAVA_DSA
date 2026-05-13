@@ -1,128 +1,76 @@
-package _06Tree._1BT;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class
-_9LevelOfEachNode
+public class _9LevelOfEachNode
 {
-    public static class Node
+    static class Node
     {
         int data;
-        Node left, right;
+        Node left;
+        Node right;
 
-        public Node(int data)
+        Node(int data)
         {
             this.data = data;
         }
     }
 
-    void printLevelOfNodes(Node root)
+    public static void levelOrder(Node root)
     {
-        if (root == null)
+        if(root == null)
         {
             return;
         }
 
         Queue<Node> q = new LinkedList<>();
-        q.add(root);
-        int level = 1;
 
-        while (!q.isEmpty())
+        q.offer(root);
+
+        while(!q.isEmpty())
         {
             int size = q.size();
 
-            System.out.print("Level " + level + ": ");
-
-            for (int i = 0; i < size; i++)
+            // Print one level
+            for(int i = 0; i < size; i++)
             {
                 Node current = q.poll();
+
                 System.out.print(current.data + " ");
 
-                if (current.left != null)
+                if(current.left != null)
                 {
-                    q.add(current.left);
+                    q.offer(current.left);
                 }
 
-                if (current.right != null)
+                if(current.right != null)
                 {
-                    q.add(current.right);
+                    q.offer(current.right);
                 }
             }
 
+            // Next line after one level
             System.out.println();
-            level++;
         }
     }
 
     public static void main(String[] args)
     {
-        _9LevelOfEachNode tree = new _9LevelOfEachNode();
+        /*
+                1
+               / \
+              2   3
+             / \
+            4   5
+        */
 
-        Node a = new Node(1);
-        Node b = new Node(2);
-        Node c = new Node(3);
-        Node d = new Node(4);
-        Node e = new Node(5);
+        Node root = new Node(1);
 
-        a.left = b;
-        a.right = c;
-        b.left = d;
-        b.right = e;
+        root.left = new Node(2);
+        root.right = new Node(3);
 
-        tree.printLevelOfNodes(a);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        levelOrder(root);
     }
 }
-
-/*
-DRY RUN
-
-Tree Structure:
-
-        1
-       / \
-      2   3
-     / \
-    4   5
-
---------------------------------
-Initial:
-Queue = [1]
-level = 1
-
---------------------------------
-Iteration 1:
-size = 1
-print: Level 1: 1
-enqueue children → 2, 3
-Queue = [2, 3]
-level = 2
-
---------------------------------
-Iteration 2:
-size = 2
-print: Level 2: 2 3
-enqueue children of 2 → 4, 5
-Queue = [4, 5]
-level = 3
-
---------------------------------
-Iteration 3:
-size = 2
-print: Level 3: 4 5
-no children
-Queue = []
-level = 4
-
---------------------------------
-Final Output:
-
-Level 1: 1
-Level 2: 2 3
-Level 3: 4 5
---------------------------------
-
-NOTE:
-- Level is counted from root (root level = 1)
-- Implemented using Queue (BFS)
-*/
