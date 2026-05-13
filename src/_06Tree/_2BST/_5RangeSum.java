@@ -88,28 +88,3 @@ public class _5RangeSum
         System.out.println("Range Sum [" + low + ", " + high + "] = " + sum);
     }
 }
-
-/*
-rangeSum(root = 10, low = 7, high = 15)
-
-10 > 7 → go left
-10 in range → add 10
-10 < 15 → go right
-
-rangeSum(5)
-5 > 7 → false (skip left)
-5 in range → false
-5 < 15 → go right
-
-rangeSum(7)
-7 > 7 → false
-7 in range → add 7
-7 < 15 → go right (null)
-
-rangeSum(15)
-15 > 7 → go left (null)
-15 in range → add 15
-15 < 15 → false
-
-Final sum = 10 + 7 + 15 = 32
-*/
