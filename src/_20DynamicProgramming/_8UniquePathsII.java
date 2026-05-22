@@ -11,23 +11,13 @@ public class _8UniquePathsII
         int[][] dp = new int[m][n];
 
         // starting cell
-        if (obstacleGrid[0][0] == 1)
+        if(obstacleGrid[0][0]==0)
         {
-            return 0;
+            dp[0][0] = 1;
         }
-        dp[0][0] = 1;
-
-        // fill first column
-        for (int i = 1; i < m; i++)
+        else
         {
-            if (obstacleGrid[i][0] == 0)
-            {
-                dp[i][0] = dp[i - 1][0];
-            }
-            else
-            {
-                dp[i][0] = 0;
-            }
+            dp[0][0] = 0;
         }
 
         // fill first row
@@ -40,6 +30,19 @@ public class _8UniquePathsII
             else
             {
                 dp[0][j] = 0;
+            }
+        }
+
+        // fill first column
+        for (int i = 1; i < m; i++)
+        {
+            if (obstacleGrid[i][0] == 0)
+            {
+                dp[i][0] = dp[i - 1][0];
+            }
+            else
+            {
+                dp[i][0] = 0;
             }
         }
 

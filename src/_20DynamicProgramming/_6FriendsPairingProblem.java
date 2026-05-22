@@ -17,6 +17,7 @@ public class _6FriendsPairingProblem
 
         for (int i = 3; i <= n; i++)
         {
+                    // single  + pair
             dp[i] = dp[i - 1] + (i - 1) * dp[i - 2];
         }
 
@@ -49,25 +50,75 @@ dp[3] = dp[2] + (3 - 1) * dp[1]
       = 2 + 2 * 1
       = 4
 
-i = 4
-dp[4] = dp[3] + (4 - 1) * dp[2]
-      = 4 + 3 * 2
-      = 10
-
 Final dp array:
-[1, 1, 2, 4, 10]
-
-Output:
-10
+[1, 1, 2, 4]
 */
 
 /*
-Input: n = 3
-Output: 4
+Dry Run for n = 3
 
-Explanation:
-1) (1) (2) (3)
-2) (1,2) (3)
-3) (1,3) (2)
-4) (2,3) (1)
+Friends:
+1 2 3
+
+Formula:
+dp[n] = dp[n - 1] + (n - 1) * dp[n - 2]
+
+-----------------------------------------
+
+Step 1:
+Friend 3 stays single
+
+Remaining friends:
+1 2
+
+Ways for 1 and 2:
+(1)(2)
+(12)
+
+Now add single 3:
+
+(1)(2)(3)
+(12)(3)
+
+Total ways = 2
+
+This is:
+dp[2]
+
+-----------------------------------------
+
+Step 2:
+Friend 3 pairs up
+
+Friend 3 can pair with:
+1 or 2
+
+Case A:
+(31)(2)
+
+Case B:
+(32)(1)
+
+Total ways = 2
+
+This is:
+(3 - 1) * dp[1]
+= 2 * 1
+= 2
+
+-----------------------------------------
+
+Final Answer:
+
+dp[3]
+= dp[2] + (3 - 1) * dp[1]
+= 2 + 2
+= 4
+
+Final Ways:
+
+(1)(2)(3)
+(12)(3)
+(31)(2)
+(32)(1)
 */

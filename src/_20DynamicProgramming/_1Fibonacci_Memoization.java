@@ -1,4 +1,4 @@
-package _19DynamicProgramming;
+package _20DynamicProgramming;
 
 //Leetcode 509
 public class _1Fibonacci_Memoization
