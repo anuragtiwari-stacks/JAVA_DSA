@@ -34,9 +34,7 @@ public class _16LongestSubsequenceSumTarget
                 // Option 2: pick current element (if allowed)
                 if (nums[i - 1] <= j && dp[i - 1][j - nums[i - 1]] != -1)
                 {
-                    dp[i][j] = Math.max(dp[i][j],
-                                        dp[i - 1][j - nums[i - 1]] + 1
-                    );
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - nums[i - 1]] + 1);
                 }
             }
         }

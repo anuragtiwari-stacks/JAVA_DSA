@@ -12,7 +12,7 @@ public class _22UnboundedKnapsack_Tabulation
 
         for (int i = 1; i <= n; i++)
         {
-            for (int w = 0; w <= C; w++)
+            for (int w = 1; w <= C; w++)
             {
                 // Option 1: skip current item
                 dp[i][w] = dp[i - 1][w];
@@ -20,10 +20,7 @@ public class _22UnboundedKnapsack_Tabulation
                 // Option 2: pick current item (UNBOUNDED)
                 if (wt[i - 1] <= w)
                 {
-                    dp[i][w] = Math.max(
-                            dp[i][w],
-                            val[i - 1] + dp[i][w - wt[i - 1]]
-                    );
+                    dp[i][w] = Math.max(dp[i][w], val[i - 1] + dp[i][w - wt[i - 1]]);
                 }
             }
         }

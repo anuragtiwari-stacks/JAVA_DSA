@@ -40,16 +40,14 @@ public class _26DeleteOperationTwoStrings_LCS
                 }
                 else
                 {
-                    dp[i][j] = Math.max(
-                            dp[i - 1][j],
-                            dp[i][j - 1]
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]
                     );
                 }
             }
         }
 
         int lcs = dp[n][m];
-        return n + m - 2 * lcs;
+        return n-lcs + m-lcs;
     }
 
     public static void main(String[] args)

@@ -1,40 +1,47 @@
 package _20DynamicProgramming;
 
-// LeetCode 322 - Coin Change (Tabulation, INF Pattern)
+// LeetCode 322 - Coin Change
+// Tabulation (INF Pattern)
+
 public class _23CoinChange_INF_Pattern
 {
     public static int coinChange(int[] coins, int amount)
     {
         int n = coins.length;
-        int INF = (int)1e9;
 
-        // dp[i][j] = minimum coins to make amount j
-        // using first i coins (unbounded)
+        int INF = (int) 1e9;
+
         int[][] dp = new int[n + 1][amount + 1];
 
-        // base case: 0 coins cannot make any positive amount
+
+        // impossible to make positive amount using 0 coins
         for (int j = 1; j <= amount; j++)
         {
             dp[0][j] = INF;
         }
 
-        // build dp table
+        // 0 amount requires 0 coins
+        for (int i = 0; i <= n; i++)
+        {
+            dp[i][0] = 0;
+        }
+
         for (int i = 1; i <= n; i++)
         {
             for (int j = 1; j <= amount; j++)
             {
-                int skip = dp[i - 1][j];
+                // Option 1: skip current coin
+                dp[i][j] = dp[i - 1][j];
 
-                int take = INF;
+                // Option 2: take current coin (UNBOUNDED)
                 if (coins[i - 1] <= j)
                 {
-                    take = 1 + dp[i][j - coins[i - 1]];
+                    dp[i][j] = Math.min(dp[i][j], 1 + dp[i][j - coins[i - 1]]);
                 }
-
-                dp[i][j] = Math.min(skip, take);
             }
         }
 
+        // If impossible
         if (dp[n][amount] >= INF)
         {
             return -1;

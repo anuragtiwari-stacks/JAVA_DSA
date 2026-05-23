@@ -1,36 +1,29 @@
 package _20DynamicProgramming;
 
 // LeetCode 494 - Target Sum (Recursion Only)
+
 public class _17TargetSum
 {
     public static int solve(int[] nums, int target, int i, int currSum)
     {
-        // base case: all elements used
+        // base case
         if (i == nums.length)
         {
             if (currSum == target)
             {
-                return 1; // one valid way
+                return 1;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
 
-        // choose + sign
+        // + sign
         int plus = solve(nums, target, i + 1, currSum + nums[i]);
 
-        // choose - sign
+        // - sign
         int minus = solve(nums, target, i + 1, currSum - nums[i]);
 
-        // total ways
         return plus + minus;
-    }
-
-    public static int findTargetSumWays(int[] nums, int target)
-    {
-        return solve(nums, target, 0, 0);
     }
 
     public static void main(String[] args)
@@ -38,9 +31,30 @@ public class _17TargetSum
         int[] nums = {1, 1, 1, 1, 1};
         int target = 3;
 
-        System.out.println(findTargetSumWays(nums, target));
+        int ans = solve(nums, target, 0, 0);
+
+        System.out.println(ans);
     }
 }
+
+/*
+nums = [1,1,1]
+target = 1
+
+                          (i=0,sum=0)
+                           /        \
+                        +1            -1
+                       /                \
+              (i=1,sum=1)         (i=1,sum=-1)
+                 /      \             /       \
+              +1        -1         +1        -1
+             /            \        /            \
+     (2,2)               (2,0)  (2,0)        (2,-2)
+        / \               / \      / \          / \
+      +1 -1             +1 -1    +1 -1       +1 -1
+      /    \            /    \    /    \      /    \
+   (3,3)(3,1)       (3,1)(3,-1)(3,1)(3,-1)(3,-1)(3,-3)
+*/
 
 /*
 ==================== FULL DRY RUN ====================

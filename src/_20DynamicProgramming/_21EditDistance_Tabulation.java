@@ -44,8 +44,7 @@ public class _21EditDistance_Tabulation
                     int delete  = dp[i - 1][j];
                     int replace = dp[i - 1][j - 1];
 
-                    dp[i][j] = 1 + Math.min(insert,
-                                   Math.min(delete, replace));
+                    dp[i][j] = 1 + Math.min(insert, Math.min(delete, replace));
                 }
             }
         }

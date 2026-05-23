@@ -5,9 +5,7 @@ public class _21EditDistance_Forward
 {
     public static int minDistance(String word1, String word2)
     {
-        return solve(word1, word2,
-                word1.length() - 1,
-                word2.length() - 1);
+        return solve(word1, word2, word1.length() - 1, word2.length() - 1);
     }
 
     private static int solve(String s1, String s2, int i, int j)

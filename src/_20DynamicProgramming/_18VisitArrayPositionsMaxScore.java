@@ -1,46 +1,46 @@
 package _20DynamicProgramming;
 
 // LeetCode 2786 - Visit Array Positions to Maximize Score
+
 public class _18VisitArrayPositionsMaxScore
 {
-    public static int maxScore(int[] nums, int x)
+    public static long maxScore(int[] nums, int x)
     {
-        int evenScore = Integer.MIN_VALUE;
-        int oddScore  = Integer.MIN_VALUE;
+        long even = Long.MIN_VALUE;
+        long odd = Long.MIN_VALUE;
 
-        // initialize with first element
+        // initialize using first element
         if (nums[0] % 2 == 0)
         {
-            evenScore = nums[0];
+            even = nums[0];
         }
         else
         {
-            oddScore = nums[0];
+            odd = nums[0];
         }
 
         for (int i = 1; i < nums.length; i++)
         {
-            int val = nums[i];
-
-            if (val % 2 == 0)
+            // current number is even
+            if (nums[i] % 2 == 0)
             {
-                int sameParity   = evenScore + val;
-                int changeParity = oddScore + val - x;
-
-                int newEven = Math.max(sameParity, changeParity);
-                evenScore = Math.max(evenScore, newEven);
+                even = Math.max(
+                        even + nums[i],      // same parity
+                        odd + nums[i] - x    // parity change
+                );
             }
+
+            // current number is odd
             else
             {
-                int sameParity   = oddScore + val;
-                int changeParity = evenScore + val - x;
-
-                int newOdd = Math.max(sameParity, changeParity);
-                oddScore = Math.max(oddScore, newOdd);
+                odd = Math.max(
+                        odd + nums[i],       // same parity
+                        even + nums[i] - x   // parity change
+                );
             }
         }
 
-        return Math.max(evenScore, oddScore);
+        return Math.max(even, odd);
     }
 
     public static void main(String[] args)
