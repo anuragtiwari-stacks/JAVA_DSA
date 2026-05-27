@@ -58,7 +58,6 @@ public class _1BFS
 
     static void bfs(int start, List<List<Integer>> graph, boolean[] visited)
     {
-
         Queue<Integer> queue = new LinkedList<>();
 
         queue.add(start);
@@ -66,7 +65,6 @@ public class _1BFS
 
         while (!queue.isEmpty())
         {
-
             int current = queue.remove();
             System.out.print(current + " ");
 
