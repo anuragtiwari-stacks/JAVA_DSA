@@ -1,9 +1,5 @@
 package _09Graph._1BFS;
 
-import java.util.*;
-
-public class _3PathExistsInGraph
-{
 
     /*
         🔗 Input:
@@ -24,18 +20,22 @@ public class _3PathExistsInGraph
         ⛔ No path exists from 0 to 5
     */
 
+import java.util.*;
+
+public class _3PathExistsInGraph
+{
     public static void main(String[] args)
     {
-
         int vertex = 6;
 
-        int[][] edges = {
-                {0, 1},
-                {0, 2},
-                {3, 5},
-                {5, 4},
-                {4, 3}
-        };
+        int[][] edges =
+                {
+                        {0, 1},
+                        {0, 2},
+                        {3, 5},
+                        {5, 4},
+                        {4, 3}
+                };
 
         int source = 0;
         int destination = 5;
@@ -52,34 +52,39 @@ public class _3PathExistsInGraph
             addEdge(graph, x[0], x[1]);
         }
 
+        System.out.println("Graph : " + graph);
+
         boolean[] visited = new boolean[vertex];
 
         boolean result = bfs(source, destination, graph, visited);
 
-        System.out.println("Path exists from " + source + " to " + destination + ": " + result);
-
+        System.out.println("\nPath exists from "
+                + source + " to "
+                + destination + " : "
+                + result);
     }
 
     static void addEdge(List<List<Integer>> graph, int u, int v)
     {
         graph.get(u).add(v);
-        graph.get(v).add(u); // because it's an undirected graph
-
-        // If there's a connection from u to v, there's also a connection from v to u.
+        graph.get(v).add(u);
     }
 
     static boolean bfs(int start, int end, List<List<Integer>> graph, boolean[] visited)
     {
-
         Queue<Integer> queue = new LinkedList<>();
 
         queue.add(start);
+
         visited[start] = true;
+
+        System.out.print("BFS Traversal : ");
 
         while (!queue.isEmpty())
         {
-
             int current = queue.remove();
+
+            System.out.print(current + " ");
 
             if (current == end)
             {
@@ -90,25 +95,13 @@ public class _3PathExistsInGraph
             {
                 if (!visited[neighbor])
                 {
-                    queue.add(neighbor);
                     visited[neighbor] = true;
+
+                    queue.add(neighbor);
                 }
             }
-
         }
 
         return false;
-
     }
-
 }
-
-/*
-    🔍 Logic Explanation:
-
-    - We build the graph using an adjacency list and the addEdge() method.
-    - Since it's undirected, each edge is added both ways.
-    - We use BFS starting from the source.
-    - If we reach the destination during traversal, we return true.
-    - If BFS ends and the destination was not reached, we return false.
-*/
