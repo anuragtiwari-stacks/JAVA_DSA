@@ -1,4 +1,4 @@
-package _09Graph._1BFS;
+package _09Graph._2DFS;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class _4KeysAndRooms
 
         boolean[] visited = new boolean[n];
 
-        bfs(rooms, visited);
+        dfs(rooms, visited, 0);
 
         for (int i = 0; i < n; i++)
         {
@@ -52,17 +52,17 @@ public class _4KeysAndRooms
         return true;
     }
 
-    private static void bfs(List<List<Integer>> rooms, boolean[] visited)
+    private static void dfs(List<List<Integer>> rooms, boolean[] visited, int start)
     {
-        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
 
-        queue.add(0);
+        stack.push(start);
 
-        visited[0] = true;
+        visited[start] = true;
 
-        while (!queue.isEmpty())
+        while (!stack.isEmpty())
         {
-            int room = queue.remove();
+            int room = stack.pop();
 
             for (int key : rooms.get(room))
             {
@@ -70,7 +70,7 @@ public class _4KeysAndRooms
                 {
                     visited[key] = true;
 
-                    queue.add(key);
+                    stack.push(key);
                 }
             }
         }

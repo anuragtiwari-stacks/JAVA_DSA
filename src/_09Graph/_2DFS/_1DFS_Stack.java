@@ -7,7 +7,8 @@ public class _1DFS_Stack
     public static void main(String[] args)
     {
         int vertices = 5;
-        List<List<Integer>> graph = new ArrayList<>();
+
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
         for (int i = 0; i < vertices; i++)
         {
@@ -19,39 +20,38 @@ public class _1DFS_Stack
         addEdge(graph, 1, 3);
         addEdge(graph, 2, 4);
 
-        boolean[] visited = new boolean[vertices];
-
-        System.out.println("DFS traversal using stack from node 0:");
-        dfsStack(0, graph, visited);
+        dfs(0, graph, vertices);
     }
 
-    public static void addEdge(List<List<Integer>> graph, int u, int v)
+    public static void addEdge(ArrayList<ArrayList<Integer>> graph, int u, int v)
     {
         graph.get(u).add(v);
         graph.get(v).add(u);
     }
 
-    public static void dfsStack(int start, List<List<Integer>> graph, boolean[] visited)
+    public static void dfs(int start, ArrayList<ArrayList<Integer>> graph, int vertices)
     {
+        boolean[] visited = new boolean[vertices];
+
         Stack<Integer> stack = new Stack<>();
+
         stack.push(start);
+
+        visited[start] = true;
 
         while (!stack.isEmpty())
         {
-            int node = stack.pop();
+            int current = stack.pop();
 
-            if (!visited[node])
+            System.out.print(current + " ");
+
+            for (int x : graph.get(current))
             {
-                visited[node] = true;
-                System.out.print(node + " ");
-
-                for (int i = graph.get(node).size() - 1; i >= 0; i--)
+                if (!visited[x])
                 {
-                    int neighbor = graph.get(node).get(i);
-                    if (!visited[neighbor])
-                    {
-                        stack.push(neighbor);
-                    }
+                    stack.push(x);
+
+                    visited[x] = true;
                 }
             }
         }

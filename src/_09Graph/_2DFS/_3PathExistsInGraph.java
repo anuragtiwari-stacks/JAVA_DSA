@@ -1,4 +1,4 @@
-package _09Graph._1BFS;
+package _09Graph._2DFS;
 
 /*
     🔗 Input:
@@ -6,15 +6,6 @@ package _09Graph._1BFS;
     edges = [[0,1],[0,2],[3,5],[5,4],[4,3]]
     source = 0
     destination = 5
-
-    🔍 Graph (Undirected):
-
-    0 → [1, 2]
-    1 → [0]
-    2 → [0]
-    3 → [5, 4]
-    4 → [5, 3]
-    5 → [3, 4]
 
     ⛔ No path exists from 0 to 5
 */
@@ -61,7 +52,7 @@ public class _3PathExistsInGraph
 
         boolean[] visited = new boolean[n];
 
-        bfs(graph, visited, source);
+        dfs(graph, visited, source);
 
         if (visited[destination] == true)
         {
@@ -71,17 +62,17 @@ public class _3PathExistsInGraph
         return false;
     }
 
-    private static void bfs(List<List<Integer>> graph, boolean[] visited, int start)
+    private static void dfs(List<List<Integer>> graph, boolean[] visited, int start)
     {
-        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
 
-        queue.add(start);
+        stack.push(start);
 
         visited[start] = true;
 
-        while (!queue.isEmpty())
+        while (!stack.isEmpty())
         {
-            int curr = queue.remove();
+            int curr = stack.pop();
 
             for (int nei : graph.get(curr))
             {
@@ -89,7 +80,7 @@ public class _3PathExistsInGraph
                 {
                     visited[nei] = true;
 
-                    queue.add(nei);
+                    stack.push(nei);
                 }
             }
         }

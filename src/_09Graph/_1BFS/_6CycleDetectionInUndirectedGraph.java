@@ -34,24 +34,20 @@ public class _6CycleDetectionInUndirectedGraph
 
         System.out.println("Graph : " + adj);
 
-        _6CycleDetectionInUndirectedGraph obj =
-                new _6CycleDetectionInUndirectedGraph();
+        _6CycleDetectionInUndirectedGraph obj = new _6CycleDetectionInUndirectedGraph();
 
         boolean result = obj.isCycle(V, adj);
 
         System.out.println("Cycle Present : " + result);
     }
 
-    static void addEdge(ArrayList<ArrayList<Integer>> adj,
-                        int u,
-                        int v)
+    static void addEdge(ArrayList<ArrayList<Integer>> adj, int u, int v)
     {
         adj.get(u).add(v);
         adj.get(v).add(u);
     }
 
-    public boolean isCycle(int V,
-                           ArrayList<ArrayList<Integer>> adj)
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj)
     {
         boolean[] visited = new boolean[V];
 
@@ -69,9 +65,7 @@ public class _6CycleDetectionInUndirectedGraph
         return false;
     }
 
-    private boolean bfs(int start,
-                        ArrayList<ArrayList<Integer>> adj,
-                        boolean[] visited)
+    private boolean bfs(int start, ArrayList<ArrayList<Integer>> adj, boolean[] visited)
     {
         Queue<Pairs> queue = new LinkedList<>();
 

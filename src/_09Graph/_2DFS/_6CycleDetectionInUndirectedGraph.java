@@ -4,6 +4,37 @@ import java.util.*;
 
 public class _6CycleDetectionInUndirectedGraph
 {
+    public static void main(String[] args)
+    {
+        int V = 4;
+
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        for (int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<>());
+        }
+
+        addEdge(adj, 0, 1);
+        addEdge(adj, 1, 2);
+        addEdge(adj, 2, 3);
+        addEdge(adj, 3, 1);
+
+        System.out.println("Graph : " + adj);
+
+        _6CycleDetectionInUndirectedGraph obj = new _6CycleDetectionInUndirectedGraph();
+
+        boolean result = obj.isCycle(V, adj);
+
+        System.out.println("Cycle Present : " + result);
+    }
+
+    static void addEdge(ArrayList<ArrayList<Integer>> adj, int u, int v)
+    {
+        adj.get(u).add(v);
+        adj.get(v).add(u);
+    }
+
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj)
     {
         boolean[] visited = new boolean[V];
@@ -18,6 +49,7 @@ public class _6CycleDetectionInUndirectedGraph
                 }
             }
         }
+
         return false;
     }
 
@@ -39,68 +71,7 @@ public class _6CycleDetectionInUndirectedGraph
                 return true;
             }
         }
+
         return false;
     }
-
-    public static void main(String[] args)
-    {
-        int V = 4;
-
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-
-        for (int i = 0; i < V; i++)
-        {
-            adj.add(new ArrayList<>());
-        }
-
-        adj.get(0).add(1);
-        adj.get(1).add(0);
-
-        adj.get(1).add(2);
-        adj.get(2).add(1);
-
-        adj.get(2).add(3);
-        adj.get(3).add(2);
-
-        adj.get(3).add(1);
-        adj.get(1).add(3);
-
-        _6CycleDetectionInUndirectedGraph obj = new _6CycleDetectionInUndirectedGraph();
-
-        System.out.println(obj.isCycle(V, adj));
-    }
 }
-
-/*
-Dry Run (0-1-2-3 cycle):
-
-Start DFS from 0
-dfs(0, -1)
- visited[0] = true
-
-Neighbor 1 → not visited
-dfs(1, 0)
- visited[1] = true
-
-Neighbors: 0, 2, 3
-0 == parent → ignore
-
-Neighbor 2 → not visited
-dfs(2, 1)
- visited[2] = true
-
-Neighbors: 1, 3
-1 == parent → ignore
-
-Neighbor 3 → not visited
-dfs(3, 2)
- visited[3] = true
-
-Neighbors: 2, 1
-2 == parent → ignore
-1 is visited AND 1 != parent(2)
-Cycle detected → return true
-
-Final Output:
-true
-*/

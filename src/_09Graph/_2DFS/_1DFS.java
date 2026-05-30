@@ -2,7 +2,7 @@ package _09Graph._2DFS;
 
 import java.util.*;
 
-public class _1DFS
+public class  _1DFS
 {
     /*
         🔗 Graph Used:
