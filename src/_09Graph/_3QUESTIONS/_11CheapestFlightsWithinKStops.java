@@ -6,25 +6,13 @@ import java.util.*;
 
 public class _11CheapestFlightsWithinKStops
 {
-    static class Pair
-    {
-        int node;
-        int price;
-
-        Pair(int node, int price)
-        {
-            this.node = node;
-            this.price = price;
-        }
-    }
-
-    static class Tuple
+    static class Node
     {
         int node;
         int cost;
         int stops;
 
-        Tuple(int node, int cost, int stops)
+        Node(int node, int cost, int stops)
         {
             this.node = node;
             this.cost = cost;
@@ -32,10 +20,9 @@ public class _11CheapestFlightsWithinKStops
         }
     }
 
-    public int findCheapestPrice(int n, int[][] flights,
-                                 int src, int dst, int k)
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k)
     {
-        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        ArrayList<ArrayList<Node>> adj = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
         {
@@ -44,7 +31,7 @@ public class _11CheapestFlightsWithinKStops
 
         for (int[] f : flights)
         {
-            adj.get(f[0]).add(new Pair(f[1], f[2]));
+            adj.get(f[0]).add(new Node(f[1], f[2], 0));
         }
 
         int[] dist = new int[n];
@@ -53,13 +40,13 @@ public class _11CheapestFlightsWithinKStops
 
         dist[src] = 0;
 
-        Queue<Tuple> q = new LinkedList<>();
+        Queue<Node> q = new LinkedList<>();
 
-        q.add(new Tuple(src, 0, 0));
+        q.add(new Node(src, 0, 0));
 
         while (!q.isEmpty())
         {
-            Tuple cur = q.remove();
+            Node cur = q.remove();
 
             int node = cur.node;
             int cost = cur.cost;
@@ -70,21 +57,22 @@ public class _11CheapestFlightsWithinKStops
                 continue;
             }
 
-            for (Pair nei : adj.get(node))
+            for (Node nei : adj.get(node))
             {
                 int nextNode = nei.node;
-                int price = nei.price;
+                int newCost = cost + nei.cost;
 
-                if (cost + price < dist[nextNode])
+                if (newCost < dist[nextNode])
                 {
-                    dist[nextNode] = cost + price;
+                    dist[nextNode] = newCost;
 
-                    q.add(new Tuple(nextNode, dist[nextNode], stops + 1));
+                    q.add(new Node(nextNode, newCost, stops + 1));
                 }
             }
         }
 
-        if (dist[dst] == Integer.MAX_VALUE)
+
+        if(dist[dst]==Integer.MAX_VALUE)
         {
             return -1;
         }
@@ -94,18 +82,16 @@ public class _11CheapestFlightsWithinKStops
 
     public static void main(String[] args)
     {
-        _11CheapestFlightsWithinKStops obj =
-                new _11CheapestFlightsWithinKStops();
+        _11CheapestFlightsWithinKStops obj = new _11CheapestFlightsWithinKStops();
 
         int n = 4;
 
-        int[][] flights =
-                {
-                        {0, 1, 100},
-                        {1, 2, 100},
-                        {2, 3, 100},
-                        {0, 3, 500}
-                };
+        int[][] flights = {
+                {0, 1, 100},
+                {1, 2, 100},
+                {2, 3, 100},
+                {0, 3, 500}
+        };
 
         int src = 0;
         int dst = 3;
