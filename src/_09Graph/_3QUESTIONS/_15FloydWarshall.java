@@ -69,8 +69,7 @@ public class _15FloydWarshall
                         {7,   INF, 1,   0}
                 };
 
-        _15FloydWarshall obj =
-                new _15FloydWarshall();
+        _15FloydWarshall obj = new _15FloydWarshall();
 
         obj.floydWarshall(V, graph);
     }

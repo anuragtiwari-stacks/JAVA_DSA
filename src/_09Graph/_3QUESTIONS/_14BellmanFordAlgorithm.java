@@ -1,13 +1,16 @@
 package _09Graph._3QUESTIONS;
 
-// Logic:
-// 1. Bellman–Ford single source shortest path nikalta hai.
-// 2. Negative edges allowed hote hain.
-// 3. Sab edges ko (V - 1) times relax karte hain.
-// 4. Extra iteration me agar distance update ho jaaye,
-//    to negative cycle exist karti hai.
-
 import java.util.*;
+
+// Bellman Ford Algorithm
+//
+// Used for:
+// 1. Single Source Shortest Path
+// 2. Negative Weight Edges
+// 3. Detecting Negative Cycle
+//
+// Time Complexity  : O(V * E)
+// Space Complexity : O(V)
 
 public class _14BellmanFordAlgorithm
 {
@@ -28,94 +31,72 @@ public class _14BellmanFordAlgorithm
     public void bellmanFord(int V, ArrayList<Edge> edges, int src)
     {
         int[] dist = new int[V];
-
-        for (int i = 0; i < V; i++)
-        {
-            dist[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(dist, Integer.MAX_VALUE);
 
         dist[src] = 0;
 
-        // Relax edges V-1 times
+        // Relax all edges V - 1 times
         for (int i = 1; i <= V - 1; i++)
         {
             for (Edge e : edges)
             {
-                if (dist[e.u] != Integer.MAX_VALUE
-                        && dist[e.u] + e.wt < dist[e.v])
+                int u = e.u;
+                int v = e.v;
+                int wt = e.wt;
+
+                // Relaxation Condition
+
+                if (dist[u] != Integer.MAX_VALUE && dist[u] + wt < dist[v])
                 {
-                    dist[e.v] = dist[e.u] + e.wt;
+                    dist[v] = dist[u] + wt;
                 }
             }
         }
 
-        // Negative cycle check
+        // Step 3:
+        // Negative Cycle Detection
+
         for (Edge e : edges)
         {
-            if (dist[e.u] != Integer.MAX_VALUE
-                    && dist[e.u] + e.wt < dist[e.v])
+            int u = e.u;
+            int v = e.v;
+            int wt = e.wt;
+
+            if (dist[u] != Integer.MAX_VALUE && dist[u] + wt < dist[v])
             {
-                System.out.println("Negative cycle detected");
+                System.out.println("Negative Cycle Detected");
+
                 return;
             }
         }
 
-        // Print result
-        System.out.println("Shortest distances from source " + src + ":");
+        // Step 4:
+        // Print shortest distances
+
+        System.out.println("Shortest Distance From Source " + src);
+
         for (int i = 0; i < V; i++)
         {
-            System.out.println("Node " + i + " -> " + dist[i]);
+            System.out.println(i + " -> " + dist[i]);
         }
     }
 
     public static void main(String[] args)
     {
         int V = 5;
+
         int src = 0;
 
         ArrayList<Edge> edges = new ArrayList<>();
 
-        // edges[u, v, weight]
-        edges.add(new Edge(1, 3, 2));
-        edges.add(new Edge(4, 3, -1));
-        edges.add(new Edge(2, 4, 1));
-        edges.add(new Edge(1, 2, 1));
         edges.add(new Edge(0, 1, 5));
+        edges.add(new Edge(1, 2, 1));
+        edges.add(new Edge(1, 3, 2));
+        edges.add(new Edge(2, 4, 1));
+        edges.add(new Edge(4, 3, -1));
 
-        _14BellmanFordAlgorithm obj =
-                new _14BellmanFordAlgorithm();
+        _14BellmanFordAlgorithm obj = new _14BellmanFordAlgorithm();
 
         obj.bellmanFord(V, edges, src);
     }
 }
-/*
-Initial:
-dist = [0, INF, INF, INF, INF]
-
-Iteration 1:
-0→1 (5)   → dist[1] = 5
-1→3 (2)   → dist[3] = 7
-1→2 (1)   → dist[2] = 6
-2→4 (1)   → dist[4] = 7
-4→3 (-1)  → dist[3] = 6
-
-dist = [0, 5, 6, 6, 7]
-
-Iteration 2:
-No update
-
-Iteration 3:
-No update
-
-Iteration 4:
-No update
-
-No negative cycle
-
-Final distances:
-0 -> 0
-1 -> 5
-2 -> 6
-3 -> 6
-4 -> 7
-*/

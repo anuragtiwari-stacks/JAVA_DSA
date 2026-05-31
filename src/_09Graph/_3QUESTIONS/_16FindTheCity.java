@@ -8,6 +8,8 @@ package _09Graph._3QUESTIONS;
 // 4. Minimum count wali city answer.
 // 5. Tie me larger index return karo.
 
+
+// 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance
 public class _16FindTheCity
 {
     static final int INF = 1000000000;
@@ -46,32 +48,33 @@ public class _16FindTheCity
             {
                 for (int j = 0; j < n; j++)
                 {
-                    dist[i][j] =
-                            Math.min(dist[i][j],
-                                    dist[i][via] + dist[via][j]);
+                    dist[i][j] = Math.min(dist[i][j], dist[i][via] + dist[via][j]);
                 }
             }
         }
 
-        int city = -1;
-        int minCount = n;
+        int []totalCity = new int[n];
 
-        // count reachable cities
-        for (int i = 0; i < n; i++)
+        for(int i=0;i<n;i++)
         {
             int count = 0;
-
-            for (int j = 0; j < n; j++)
+            for(int j=0;j<n;j++)
             {
-                if (i != j && dist[i][j] <= distanceThreshold)
+                if(dist[i][j] <= distanceThreshold)
                 {
                     count++;
                 }
             }
+            totalCity[i]=count;
+        }
 
-            if (count <= minCount)
+        int minCount = Integer.MAX_VALUE;
+        int city = -1;
+        for(int i=totalCity.length-1 ;i>=0; i--)
+        {
+            if(totalCity[i]<minCount)
             {
-                minCount = count;
+                minCount = totalCity[i];
                 city = i;
             }
         }
@@ -97,83 +100,21 @@ public class _16FindTheCity
         System.out.println(obj.findTheCity(n, edges, distanceThreshold));
     }
 }
+
 /*
-Input:
-n = 4
-distanceThreshold = 4
+for (int via = 0; via < n; via++)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+        if i need to use Integer.MAX_VALUE then it may cause overflow so that's why i have used
 
-Edges (undirected):
-0-1 (3)
-1-2 (1)
-1-3 (4)
-2-3 (1)
-
---------------------------------
-Initial dist matrix:
-
-0  3  INF INF
-3  0  1   4
-INF 1  0   1
-INF 4  1   0
-
---------------------------------
-via = 0
-
-No useful update
-
-Matrix:
-0  3  INF INF
-3  0  1   4
-INF 1  0   1
-INF 4  1   0
-
---------------------------------
-via = 1
-
-0->2 : 0->1 (3) + 1->2 (1) = 4 < INF → update
-0->3 : 0->1 (3) + 1->3 (4) = 7 < INF → update
-
-Matrix:
-0  3  4  7
-3  0  1  4
-4  1  0  1
-7  4  1  0
-
---------------------------------
-via = 2
-
-0->3 : 0->2 (4) + 2->3 (1) = 5 < 7 → update
-1->3 : 1->2 (1) + 2->3 (1) = 2 < 4 → update
-
-Matrix:
-0  3  4  5
-3  0  1  2
-4  1  0  1
-5  2  1  0
-
---------------------------------
-via = 3
-
-No better update
-
-Final dist matrix:
-0  3  4  5
-3  0  1  2
-4  1  0  1
-5  2  1  0
-
---------------------------------
-Count cities within threshold (≤ 4):
-
-City 0: {1,2} → count = 2
-City 1: {0,2,3} → count = 3
-City 2: {0,1,3} → count = 3
-City 3: {1,2} → count = 2
-
-Minimum count = 2
-Tie between city 0 and 3
-Choose larger index → 3
-
---------------------------------
-Answer = 3
+            if (dist[i][via] != Integer.MAX_VALUE && dist[via][j] != Integer.MAX_VALUE)
+            {
+                dist[i][j] = Math.min(dist[i][j],dist[i][via] + dist[via][j]);
+            }
+        }
+    }
+}
 */
