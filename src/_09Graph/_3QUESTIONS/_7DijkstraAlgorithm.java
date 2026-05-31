@@ -1,16 +1,5 @@
 package _09Graph._3QUESTIONS;
 
-// Logic:
-// 1. Dijkstra algorithm weighted graph me shortest path find karta hai
-//    (sirf NON-NEGATIVE weights ke liye).
-// 2. Distance array maintain karte hain, initially sab INF, source = 0.
-// 3. Min-heap (PriorityQueue) use karte hain jisse minimum distance wala
-//    node pehle mile.
-// 4. Har node ke neighbors ke liye:
-//    agar (currentDist + edgeWeight < neighborDist)
-//    to distance update kar do aur PQ me daal do.
-// 5. Jab PQ empty ho jaaye, distance array me final shortest distances mil jaati hain.
-
 import java.util.*;
 
 public class _7DijkstraAlgorithm
@@ -18,45 +7,43 @@ public class _7DijkstraAlgorithm
     static class Pair
     {
         int node;
-        int dist;
+        int weight;
 
-        Pair(int node, int dist)
+        Pair(int node, int weight)
         {
             this.node = node;
-            this.dist = dist;
+            this.weight = weight;
         }
     }
 
     public int[] dijkstra(int V, ArrayList<ArrayList<Pair>> adj, int src)
     {
         int[] dist = new int[V];
+
         Arrays.fill(dist, Integer.MAX_VALUE);
 
-        PriorityQueue<Pair> pq =
-                new PriorityQueue<>((a, b) -> a.dist - b.dist);
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
 
         dist[src] = 0;
+
         pq.add(new Pair(src, 0));
 
         while (!pq.isEmpty())
         {
             Pair curr = pq.remove();
-            int node = curr.node;
-            int currDist = curr.dist;
 
-            if (currDist > dist[node])
-            {
-                continue;
-            }
+            int node = curr.node;
+            int currWeight = curr.weight;
 
             for (Pair neighbor : adj.get(node))
             {
                 int nextNode = neighbor.node;
-                int weight = neighbor.dist;
+                int edgeWeight = neighbor.weight;
 
-                if (currDist + weight < dist[nextNode])
+                if (currWeight + edgeWeight < dist[nextNode])
                 {
-                    dist[nextNode] = currDist + weight;
+                    dist[nextNode] = currWeight + edgeWeight;
+
                     pq.add(new Pair(nextNode, dist[nextNode]));
                 }
             }
@@ -89,68 +76,11 @@ public class _7DijkstraAlgorithm
 
         _7DijkstraAlgorithm obj = new _7DijkstraAlgorithm();
 
-        int[] result = obj.dijkstra(V, adj, 0);
+        int[] ans = obj.dijkstra(V, adj, 0);
 
         for (int i = 0; i < V; i++)
         {
-            System.out.println("Distance from 0 to " + i + " = " + result[i]);
+            System.out.println(ans[i]);
         }
     }
 }
-
-/*
-Dry Run:
-
-Graph edges:
-0 → 1 (2)
-0 → 4 (1)
-1 → 2 (3)
-1 → 3 (8)
-1 → 4 (2)
-2 → 3 (1)
-4 → 3 (5)
-
-Source = 0
-
-Initial:
-dist = [0, INF, INF, INF, INF]
-PQ = [(0,0)]
-
-Step 1:
-Remove (0,0)
-Check neighbors:
-1: 0+2 < INF → dist[1]=2
-4: 0+1 < INF → dist[4]=1
-PQ = [(4,1), (1,2)]
-
-Step 2:
-Remove (4,1)
-Check neighbor:
-3: 1+5 = 6 < INF → dist[3]=6
-PQ = [(1,2), (3,6)]
-
-Step 3:
-Remove (1,2)
-Check neighbors:
-2: 2+3 = 5 < INF → dist[2]=5
-3: 2+8 = 10 > 6 → ignore
-4: 2+2 = 4 > 1 → ignore
-PQ = [(2,5), (3,6)]
-
-Step 4:
-Remove (2,5)
-Check neighbor:
-3: 5+1 = 6 == 6 → no change
-PQ = [(3,6)]
-
-Step 5:
-Remove (3,6)
-No neighbors
-
-Final distances:
-0 → 0
-1 → 2
-2 → 5
-3 → 6
-4 → 1
-*/

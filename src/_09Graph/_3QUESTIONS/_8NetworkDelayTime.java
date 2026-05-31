@@ -15,6 +15,7 @@ package _09Graph._3QUESTIONS;
 
 import java.util.*;
 
+// 743. Network Delay Time
 public class _8NetworkDelayTime
 {
     static class Pair
@@ -46,7 +47,7 @@ public class _8NetworkDelayTime
         int[] dist = new int[n + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.time - b.time);
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.time,b.time));
 
         dist[k] = 0;
         pq.add(new Pair(k, 0));
@@ -103,59 +104,3 @@ public class _8NetworkDelayTime
         System.out.println(obj.networkDelayTime(times, n, k));
     }
 }
-
-/*
-Dry Run:
-
-times =
-2 → 1 (1)
-2 → 3 (1)
-3 → 4 (1)
-
-n = 4, k = 2
-
-Step 1: Build graph
-
-2 : (1,1), (3,1)
-3 : (4,1)
-
-Step 2: Initialize
-
-dist = [INF, INF, 0, INF, INF]
-PQ = [(2,0)]
-
-Step 3:
-Remove (2,0)
-Check neighbors:
-1: 0+1 < INF → dist[1]=1 → push (1,1)
-3: 0+1 < INF → dist[3]=1 → push (3,1)
-
-PQ = [(1,1), (3,1)]
-
-Step 4:
-Remove (1,1)
-Node 1 has no neighbors
-
-PQ = [(3,1)]
-
-Step 5:
-Remove (3,1)
-Check neighbor:
-4: 1+1 < INF → dist[4]=2 → push (4,2)
-
-PQ = [(4,2)]
-
-Step 6:
-Remove (4,2)
-No neighbors
-
-Final dist:
-1 → 1
-2 → 0
-3 → 1
-4 → 2
-
-Maximum time = 2
-
-Return 2
-*/

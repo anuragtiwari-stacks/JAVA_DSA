@@ -77,8 +77,7 @@ public class _2TopologicalSortUsingBFS
         adj.get(2).add(3);
         adj.get(3).add(1);
 
-        _2TopologicalSortUsingBFS obj =
-                new _2TopologicalSortUsingBFS();
+        _2TopologicalSortUsingBFS obj = new _2TopologicalSortUsingBFS();
 
         int[] result = obj.topoSort(V, adj);
 

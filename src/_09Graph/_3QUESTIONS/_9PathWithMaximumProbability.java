@@ -15,6 +15,7 @@ package _09Graph._3QUESTIONS;
 
 import java.util.*;
 
+// 1514. Path with Maximum Probability
 public class _9PathWithMaximumProbability
 {
     static class Pair
@@ -121,42 +122,3 @@ public class _9PathWithMaximumProbability
                 n, edges, succProb, start, end));
     }
 }
-
-/*
-Dry Run:
-
-n = 3
-edges:
-0 --0.5-- 1
-1 --0.5-- 2
-0 --0.2-- 2
-
-start = 0, end = 2
-
-Initial:
-prob = [1.0, 0.0, 0.0]
-PQ = [(0, 1.0)]
-
-Step 1:
-Remove (0, 1.0)
-Neighbors:
-1: 1.0 * 0.5 = 0.5 > 0 → prob[1]=0.5 → push (1,0.5)
-2: 1.0 * 0.2 = 0.2 > 0 → prob[2]=0.2 → push (2,0.2)
-
-PQ = [(1,0.5), (2,0.2)]
-
-Step 2:
-Remove (1, 0.5)
-Neighbors:
-0: 0.5 * 0.5 = 0.25 < 1.0 → ignore
-2: 0.5 * 0.5 = 0.25 > 0.2 → prob[2]=0.25 → push (2,0.25)
-
-PQ = [(2,0.25), (2,0.2)]
-
-Step 3:
-Remove (2, 0.25)
-node == end → return 0.25
-
-Final Answer:
-0.25
-*/

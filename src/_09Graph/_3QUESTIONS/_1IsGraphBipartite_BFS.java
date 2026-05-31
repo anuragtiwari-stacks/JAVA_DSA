@@ -10,6 +10,7 @@ package _09Graph._3QUESTIONS;
 
 import java.util.*;
 
+// 785. Is Graph Bipartite?
 public class _1IsGraphBipartite_BFS
 {
     public boolean isBipartite(int[][] graph)

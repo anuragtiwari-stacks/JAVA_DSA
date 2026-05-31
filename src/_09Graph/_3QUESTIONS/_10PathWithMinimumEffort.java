@@ -2,6 +2,8 @@ package _09Graph._3QUESTIONS;
 
 import java.util.*;
 
+// 1631. Path With Minimum Effort
+
 public class _10PathWithMinimumEffort
 {
     static class Triplet
@@ -33,8 +35,7 @@ public class _10PathWithMinimumEffort
             }
         }
 
-        PriorityQueue<Triplet> pq =
-                new PriorityQueue<>((a, b) -> a.effort - b.effort);
+        PriorityQueue<Triplet> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.effort,b.effort));
 
         ans[0][0] = 0;
         pq.add(new Triplet(0, 0, 0));
@@ -45,11 +46,6 @@ public class _10PathWithMinimumEffort
             int row = top.row;
             int col = top.col;
             int effort = top.effort;
-
-            if (row == n - 1 && col == m - 1)
-            {
-                return effort;
-            }
 
             // going up
             if (row > 0)
@@ -103,8 +99,7 @@ public class _10PathWithMinimumEffort
                 }
             }
         }
-
-        return 0;
+        return ans[n - 1][m - 1];
     }
 
     public static void main(String[] args)

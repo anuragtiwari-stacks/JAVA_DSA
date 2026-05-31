@@ -1,7 +1,7 @@
 package _09Graph._1BFS;
 import java.util.*;
-// Leetcode 547. Number of Provinces
 
+// Leetcode 547. Number of Provinces
 public class _2NumberOfProvinces
 {
 
