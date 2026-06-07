@@ -4,7 +4,7 @@ package _19BackTracking;
 import java.util.ArrayList;
 import java.util.List;
 
-public class _1Permutations
+public class _1Permutations_1
 {
     public List<List<Integer>> permute(int[] nums)
     {
@@ -41,7 +41,7 @@ public class _1Permutations
 
     public static void main(String[] args)
     {
-        _1Permutations obj = new _1Permutations();
+        _1Permutations_1 obj = new _1Permutations_1();
 
         int[] nums = {1, 2, 3};
 
