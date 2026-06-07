@@ -13,7 +13,7 @@ in the path equals targetSum.
 A leaf is a node with no left and right children.
 */
 
-public class _26PathSum2_BackTracking
+public class _26PathSum
 {
 
     /*
