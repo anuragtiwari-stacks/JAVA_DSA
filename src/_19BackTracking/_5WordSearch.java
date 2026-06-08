@@ -6,16 +6,18 @@ public class _5WordSearch
 {
     public boolean exist(char[][] board, String word)
     {
-        int m = board.length;
-        int n = board[0].length;
+        int r = board.length;
+        int c = board[0].length;
 
-        for (int i = 0; i < m; i++)
+        boolean[][] visited = new boolean[r][c];
+
+        for(int i = 0; i < r; i++)
         {
-            for (int j = 0; j < n; j++)
+            for(int j = 0; j < c; j++)
             {
-                if (board[i][j] == word.charAt(0))
+                if(board[i][j] == word.charAt(0))
                 {
-                    if (find(board, word, i, j, 0))
+                    if(WordSearch(board, visited, word, i, j, 0))
                     {
                         return true;
                     }
@@ -26,36 +28,70 @@ public class _5WordSearch
         return false;
     }
 
-    // DFS + backtracking
-    public boolean find(char[][] board, String word, int row, int col, int idx)
+    public boolean WordSearch(char[][] board, boolean[][] visited, String word, int r, int c, int idx)
     {
-        if (idx == word.length())
+        if(idx == word.length() - 1)
         {
             return true;
         }
 
-        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length)
+        visited[r][c] = true;
+
+        // Up
+        if(r - 1 >= 0)
         {
-            return false;
+            if(board[r - 1][c] == word.charAt(idx + 1) && !visited[r - 1][c])
+            {
+                if(WordSearch(board, visited, word,
+                        r - 1, c, idx + 1))
+                {
+                    return true;
+                }
+            }
         }
 
-        if (board[row][col] != word.charAt(idx))
+        // Down
+        if(r + 1 < board.length)
         {
-            return false;
+            if(board[r + 1][c] == word.charAt(idx + 1) && !visited[r + 1][c])
+            {
+                if(WordSearch(board, visited, word,
+                        r + 1, c, idx + 1))
+                {
+                    return true;
+                }
+            }
         }
 
-        char temp = board[row][col];
-        board[row][col] = '#';   // mark visited
+        // Left
+        if(c - 1 >= 0)
+        {
+            if(board[r][c - 1] == word.charAt(idx + 1) && !visited[r][c - 1])
+            {
+                if(WordSearch(board, visited, word,
+                        r, c - 1, idx + 1))
+                {
+                    return true;
+                }
+            }
+        }
 
-        boolean found =
-                find(board, word, row + 1, col, idx + 1) ||
-                        find(board, word, row - 1, col, idx + 1) ||
-                        find(board, word, row, col + 1, idx + 1) ||
-                        find(board, word, row, col - 1, idx + 1);
+        // Right
+        if(c + 1 < board[0].length)
+        {
+            if(board[r][c + 1] == word.charAt(idx + 1)  && !visited[r][c + 1])
+            {
+                if(WordSearch(board, visited, word,
+                        r, c + 1, idx + 1))
+                {
+                    return true;
+                }
+            }
+        }
 
-        board[row][col] = temp;  // backtrack
+        visited[r][c] = false; // backtracking
 
-        return found;
+        return false;
     }
 
     public static void main(String[] args)
@@ -74,26 +110,3 @@ public class _5WordSearch
         System.out.println(obj.exist(board, word));
     }
 }
-
-/*
----------------- DRY RUN ----------------
-
-Board:
-A B C E
-S F C S
-A D E E
-
-Word = "ABCCED"
-
-Start at (0,0) = 'A'
-→ move right to 'B'
-→ move right to 'C'
-→ move down to 'C'
-→ move down to 'E'
-→ move left to 'D'
-
-All characters matched in order
-idx == word.length() → true
-
-----------------------------------------
-*/
