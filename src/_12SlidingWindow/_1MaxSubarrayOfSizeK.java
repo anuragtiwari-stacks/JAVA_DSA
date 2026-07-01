@@ -1,70 +1,69 @@
 package _12SlidingWindow;
 
+import java.util.HashSet;
+
 public class _1MaxSubarrayOfSizeK
 {
-    public static int maxSatisfied(int[] arr, int[] grumpy, int k)
+    public static boolean isValid(int[] nums, int start, int end)
     {
-        int n = arr.length;
+        HashSet<Integer> set = new HashSet<>();
 
-        // Step 1: already satisfied customers
-        int base = 0;
-        for (int i = 0; i < n; i++)
+        for (int i = start; i <= end; i++)
         {
-            if (grumpy[i] == 0)
+            if (set.contains(nums[i]))
             {
-                base = base + arr[i];
+                return false;
             }
+
+            set.add(nums[i]);
         }
 
-        // Step 2: sliding window for extra satisfied
+        return true;
+    }
+
+    public static long getSum(int[] nums, int start, int end)
+    {
+        long sum = 0;
+
+        for (int i = start; i <= end; i++)
+        {
+            sum = sum + nums[i];
+        }
+
+        return sum;
+    }
+
+    public static long maximumSubarraySum(int[] nums, int k)
+    {
+        int n = nums.length;
+
         int i = 0;
         int j = k - 1;
-        int windowSum = 0;
 
-        // first window
-        for (int x = i; x <= j; x++)
-        {
-            if (grumpy[x] == 1)
-            {
-                windowSum = windowSum + arr[x];
-            }
-        }
+        long maxSum = 0;
 
-        int maxSum = windowSum;
-
-        i++;
-        j++;
-
-        // slide window
         while (j < n)
         {
-            if (grumpy[j] == 1)
+            if (isValid(nums, i, j))
             {
-                windowSum = windowSum + arr[j];
-            }
+                long sum = getSum(nums, i, j);
 
-            if (grumpy[i - 1] == 1)
-            {
-                windowSum = windowSum - arr[i - 1];
+                maxSum = Math.max(maxSum, sum);
             }
-
-            maxSum = Math.max(maxSum, windowSum);
 
             i++;
             j++;
         }
 
-        return base + maxSum;
+        return maxSum;
     }
 
     public static void main(String[] args)
     {
-        int[] customers = {1, 0, 1, 2, 1, 1, 7, 5};
-        int[] grumpy    = {0, 1, 0, 1, 0, 1, 0, 1};
+        int[] nums = {1, 5, 4, 2, 9, 9, 9};
+
         int k = 3;
 
-        int result = maxSatisfied(customers, grumpy, k);
-
-        System.out.println("Maximum satisfied customers = " + result);
+        System.out.println(maximumSubarraySum(nums, k));
     }
 }

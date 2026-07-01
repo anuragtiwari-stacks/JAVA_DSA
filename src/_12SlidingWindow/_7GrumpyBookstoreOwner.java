@@ -2,144 +2,69 @@ package _12SlidingWindow;
 
 public class _7GrumpyBookstoreOwner
 {
-    public int maxSatisfied(int[] arr, int[] grumpy, int k)
+    public static int maxSatisfied(int[] arr, int[] grumpy, int k)
     {
         int n = arr.length;
-        int i = 0, j = 0;
-        int unsatisfied = 0;
-        int maxUnsatisfied = 0;
-        int a = 0, b = 0;
 
-        // Initial window of size k
-        while (j < k)
+        // Step 1: already satisfied customers
+        int base = 0;
+        for (int i = 0; i < n; i++)
         {
-            if (grumpy[j] == 1)
+            if (grumpy[i] == 0)
             {
-                unsatisfied += arr[j];
+                base = base + arr[i];
             }
-            j++;
         }
 
-        maxUnsatisfied = unsatisfied;
-        a = i;
-        b = j - 1;
+        // Step 2: sliding window for extra satisfied
+        int i = 0;
+        int j = k - 1;
+        int windowSum = 0;
 
-        // Sliding window
+        // first window
+        for (int x = i; x <= j; x++)
+        {
+            if (grumpy[x] == 1)
+            {
+                windowSum = windowSum + arr[x];
+            }
+        }
+
+        int maxSum = windowSum;
+
+        i++;
+        j++;
+
+        // slide window
         while (j < n)
         {
-            if (grumpy[i] == 1)
-            {
-                unsatisfied -= arr[i];
-            }
-
             if (grumpy[j] == 1)
             {
-                unsatisfied += arr[j];
+                windowSum = windowSum + arr[j];
             }
+
+            if (grumpy[i - 1] == 1)
+            {
+                windowSum = windowSum - arr[i - 1];
+            }
+
+            maxSum = Math.max(maxSum, windowSum);
 
             i++;
             j++;
-
-            if (unsatisfied > maxUnsatisfied)
-            {
-                maxUnsatisfied = unsatisfied;
-                a = i;
-                b = j - 1;
-            }
         }
 
-        // Apply secret technique (make grumpy = 0 in best window)
-        for (int x = a; x <= b; x++)
-        {
-            grumpy[x] = 0;
-        }
-
-        // Calculate total satisfied customers
-        int satisfied = 0;
-        for (int x = 0; x < n; x++)
-        {
-            if (grumpy[x] == 0)
-            {
-                satisfied += arr[x];
-            }
-        }
-
-        return satisfied;
+        return base + maxSum;
     }
 
     public static void main(String[] args)
     {
-        _7GrumpyBookstoreOwner sol = new _7GrumpyBookstoreOwner();
+        int[] customers = {1, 0, 1, 2, 1, 1, 7, 5};
+        int[] grumpy    = {0, 1, 0, 1, 0, 1, 0, 1};
+        int k = 3;
 
-        int[] customers1 = {1, 0, 1, 2, 1, 1, 7, 5};
-        int[] grumpy1    = {0, 1, 0, 1, 0, 1, 0, 1};
-        int minutes1 = 3;
+        int result = maxSatisfied(customers, grumpy, k);
 
-        System.out.println(sol.maxSatisfied(customers1, grumpy1, minutes1)); // Expected: 16
+        System.out.println("Maximum satisfied customers = " + result);
     }
 }
-
-/*
-======================== DRY RUN ========================
-
-Input:
-customers = [1,0,1,2,1,1,7,5]
-grumpy    = [0,1,0,1,0,1,0,1]
-k = 3
-
---------------------------------------------------------
-STEP 1: Initial window (0 to 2)
---------------------------------------------------------
-j = 0 -> grumpy[0]=0 → unsatisfied = 0
-j = 1 -> grumpy[1]=1 → unsatisfied = 0
-j = 2 -> grumpy[2]=0 → unsatisfied = 0
-
-maxUnsatisfied = 0
-window = [0..2]
-
---------------------------------------------------------
-STEP 2: Slide window
---------------------------------------------------------
-
-Window [1..3]
-remove i=0 (grumpy=0) → unsatisfied = 0
-add j=3 (grumpy=1) → unsatisfied = 2
-maxUnsatisfied = 2
-best window = [1..3]
-
-Window [2..4]
-remove i=1 (grumpy=1) → unsatisfied = 2
-add j=4 (grumpy=0) → unsatisfied = 2
-
-Window [3..5]
-remove i=2 (grumpy=0) → unsatisfied = 2
-add j=5 (grumpy=1) → unsatisfied = 3
-maxUnsatisfied = 3
-best window = [3..5]
-
-Window [4..6]
-remove i=3 (grumpy=1) → unsatisfied = 1
-add j=6 (grumpy=0) → unsatisfied = 1
-
-Window [5..7]
-remove i=4 (grumpy=0) → unsatisfied = 1
-add j=7 (grumpy=1) → unsatisfied = 6
-maxUnsatisfied = 6
-best window = [5..7]
-
---------------------------------------------------------
-STEP 3: Make grumpy = 0 in window [5..7]
---------------------------------------------------------
-grumpy becomes:
-[0,1,0,1,0,0,0,0]
-
---------------------------------------------------------
-STEP 4: Count satisfied customers
---------------------------------------------------------
-Index-wise sum where grumpy == 0:
-1 + 1 + 1 + 1 + 7 + 5 = 16
-
---------------------------------------------------------
-Final Answer = 16 ✅
-========================================================
-*/
