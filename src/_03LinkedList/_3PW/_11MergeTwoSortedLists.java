@@ -43,13 +43,18 @@ public class _11MergeTwoSortedLists
             tail = tail.next;
         }
 
-        if (l1 != null)
+        while (l1 != null)
         {
             tail.next = l1;
+            tail = tail.next;
+            l1 = l1.next;
         }
-        else
+
+        while (l2 != null)
         {
             tail.next = l2;
+            tail = tail.next;
+            l2 = l2.next;
         }
 
         return dummy.next;
