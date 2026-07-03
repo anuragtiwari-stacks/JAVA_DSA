@@ -22,7 +22,7 @@ public class _7CyclicSort_1
 
         while (i < arr.length)
         {
-            if (arr[i] < arr.length && arr[i] != arr[arr[i]])
+            if (arr[i] != arr[arr[i]])
             {
                 // Swap arr[i] with arr[arr[i]]
                 int temp = arr[i];
