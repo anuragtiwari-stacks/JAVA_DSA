@@ -70,9 +70,9 @@ public class _3DeleteMiddleNode
         // Move fast pointer two steps and slow one step until fast reaches end
         while (fast != null && fast.next != null)
         {
-            fast = fast.next.next;
             prev = slow;
             slow = slow.next;
+            fast = fast.next.next;
         }
 
         // Now slow is pointing to middle node, prev is node before it
