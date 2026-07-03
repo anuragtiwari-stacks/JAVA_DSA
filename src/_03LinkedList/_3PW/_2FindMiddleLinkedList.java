@@ -13,6 +13,7 @@ public class _2FindMiddleLinkedList
             this.next = null;
         }
     }
+
     Node head;
 
     // Add node at the end
@@ -27,44 +28,92 @@ public class _2FindMiddleLinkedList
         else
         {
             Node temp = head;
+
             while (temp.next != null)
             {
                 temp = temp.next;
             }
+
             temp.next = newNode;
         }
     }
 
-    // Find the middle node data
-    public int findMiddle()
+    // Odd -> Middle
+    // Even -> First Middle
+    public int findFirstMiddle()
     {
-        if (head == null)
-        {
-            throw new IllegalStateException("List is empty");
-        }
-
         Node slow = head;
         Node fast = head;
 
-        while (fast != null && fast.next != null)
+        while (fast.next != null && fast.next.next != null)
         {
-            fast = fast.next.next;
             slow = slow.next;
+            fast = fast.next.next;
         }
 
         return slow.data;
     }
 
+    // Odd -> Middle
+    // Even -> Second Middle
+    public int findSecondMiddle()
+    {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow.data;
+    }
+
+
     public static void main(String[] args)
     {
-        _2FindMiddleLinkedList list = new _2FindMiddleLinkedList();
+        // Example 1 : Odd Linked List
+        _2FindMiddleLinkedList oddList = new _2FindMiddleLinkedList();
 
-        list.add(10);
-        list.add(20);
-        list.add(30);
-        list.add(40);
-        list.add(50);
+        oddList.add(10);
+        oddList.add(20);
+        oddList.add(30);
+        oddList.add(40);
+        oddList.add(50);
 
-        System.out.println("Middle element is: " + list.findMiddle());
+        System.out.println("Example 1 (Odd):");
+        System.out.println("Middle = " + oddList.findFirstMiddle());
+        System.out.println("Middle = " + oddList.findSecondMiddle());
+        System.out.println();
+
+
+        // Example 2 : Even Linked List (First Middle)
+        _2FindMiddleLinkedList evenList1 = new _2FindMiddleLinkedList();
+
+        evenList1.add(10);
+        evenList1.add(20);
+        evenList1.add(30);
+        evenList1.add(40);
+        evenList1.add(50);
+        evenList1.add(60);
+
+        System.out.println("Example 2 (Even):");
+        System.out.println("First Middle = " + evenList1.findFirstMiddle());
+        System.out.println();
+
+
+        // Example 3 : Even Linked List (Second Middle)
+        _2FindMiddleLinkedList evenList2 = new _2FindMiddleLinkedList();
+
+        evenList2.add(10);
+        evenList2.add(20);
+        evenList2.add(30);
+        evenList2.add(40);
+        evenList2.add(50);
+        evenList2.add(60);
+
+        System.out.println("Example 3 (Even):");
+        System.out.println("Second Middle = " + evenList2.findSecondMiddle());
     }
 }
