@@ -54,7 +54,7 @@ public class _16MaxTwinSumLinkedList
 
         int max = 0;
 
-        while (start != end && start.next != end)
+        while (start != end && start.next != end)  // same as while(left<right) left++ , right--
         {
             Node last = getLast(head, end);
 

@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class _6BalancedBracket
 {
-
     public static boolean isBalanced(String expression)
     {
         Stack<Character> stack = new Stack<>();
@@ -17,7 +16,8 @@ public class _6BalancedBracket
             {
                 stack.push(ch);
             }
-            else if (ch == ')' || ch == '}' || ch == ']')
+
+            if (ch == ']')
             {
                 if (stack.isEmpty())
                 {
@@ -26,7 +26,37 @@ public class _6BalancedBracket
 
                 char top = stack.pop();
 
-                if (!isMatchingPair(top, ch))
+                if (top != '[')
+                {
+                    return false;
+                }
+            }
+
+            if (ch == ')')
+            {
+                if (stack.isEmpty())
+                {
+                    return false;
+                }
+
+                char top = stack.pop();
+
+                if (top != '(')
+                {
+                    return false;
+                }
+            }
+
+            if (ch == '}')
+            {
+                if (stack.isEmpty())
+                {
+                    return false;
+                }
+
+                char top = stack.pop();
+
+                if (top != '{')
                 {
                     return false;
                 }
@@ -36,35 +66,20 @@ public class _6BalancedBracket
         return stack.isEmpty();
     }
 
-    public static boolean isMatchingPair(char open, char close)
-    {
-        if (open == '(' && close == ')')
-        {
-            return true;
-        }
-        else if (open == '{' && close == '}')
-        {
-            return true;
-        }
-        else if (open == '[' && close == ']')
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public static void main(String[] args)
     {
         String expr1 = "{[()]}";
         String expr2 = "{[(])}";
         String expr3 = "((()))[]{}";
         String expr4 = "[({})](]";
+        String expr5 = "(";
+        String expr6 = "]";
 
         System.out.println(expr1 + " -> " + isBalanced(expr1));
         System.out.println(expr2 + " -> " + isBalanced(expr2));
         System.out.println(expr3 + " -> " + isBalanced(expr3));
         System.out.println(expr4 + " -> " + isBalanced(expr4));
+        System.out.println(expr5 + " -> " + isBalanced(expr5));
+        System.out.println(expr6 + " -> " + isBalanced(expr6));
     }
-
 }
