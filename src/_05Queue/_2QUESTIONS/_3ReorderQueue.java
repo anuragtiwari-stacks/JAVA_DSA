@@ -35,12 +35,12 @@ public class _3ReorderQueue
         // Step 1: split
         for (int i = 0; i < n / 2; i++)
         {
-            s1.push(q.poll());
+            s1.push(q.remove());
         }
 
         for (int i = n / 2; i < n; i++)
         {
-            s2.push(q.poll());
+            s2.push(q.remove());
         }
 
         // reverse
@@ -57,8 +57,8 @@ public class _3ReorderQueue
         // interleave
         while (!rev1.isEmpty() && !rev2.isEmpty())
         {
-            q.offer(rev1.pop());
-            q.offer(rev2.pop());
+            q.add(rev1.pop());
+            q.add(rev2.pop());
         }
     }
 
@@ -75,14 +75,13 @@ public class _3ReorderQueue
     {
         Queue<Integer> q = new LinkedList<>();
 
-        q.offer(1);
-        q.offer(2);
-        q.offer(3);
-        q.offer(4);
-        q.offer(5);
-        q.offer(6);
-        q.offer(7);
-        q.offer(8);
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+        q.add(6);
+        q.add(7);
+        q.add(8);
 
         System.out.print("Original Queue: ");
         display(q);

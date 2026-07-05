@@ -13,11 +13,6 @@ public class _6InfixWithParentheses
         {
             char ch = s.charAt(i);
 
-            if (ch == ' ')
-            {
-                continue;
-            }
-
             if (Character.isDigit(ch))
             {
                 numStack.push(ch - '0');

@@ -21,7 +21,6 @@ LOGIC:
 
 public class _6Dota2Senate
 {
-
     public static String predictPartyVictory(String senate)
     {
         Queue<Integer> r = new LinkedList<>();
@@ -29,36 +28,36 @@ public class _6Dota2Senate
 
         int n = senate.length();
 
-        // Step 1: store indices
+        // Step 1: Store indices
         for (int i = 0; i < n; i++)
         {
             if (senate.charAt(i) == 'R')
             {
-                r.offer(i);
+                r.add(i);
             }
             else
             {
-                d.offer(i);
+                d.add(i);
             }
         }
 
-        // Step 2: simulate voting rounds
+        // Step 2: Simulate voting rounds
         while (!r.isEmpty() && !d.isEmpty())
         {
-            int ri = r.poll();
-            int di = d.poll();
+            int ri = r.remove();
+            int di = d.remove();
 
             if (ri < di)
             {
-                r.offer(ri + n);
+                r.add(ri + n);
             }
             else
             {
-                d.offer(di + n);
+                d.add(di + n);
             }
         }
 
-        // Step 3: decide winner
+        // Step 3: Decide winner
         if (r.isEmpty())
         {
             return "Dire";
@@ -78,49 +77,3 @@ public class _6Dota2Senate
         System.out.println("Winning party: " + result);
     }
 }
-
-/*
-========================
-DRY RUN
-========================
-
-senate = "RDDRR"
-n = 5
-
-Indices:
-R queue = [0, 3, 4]
-D queue = [1, 2]
-
-Round 1:
-ri = 0, di = 1
-0 < 1 → R bans D
-R re-added with index 0 + 5 = 5
-R = [3, 4, 5]
-D = [2]
-
-Round 2:
-ri = 3, di = 2
-3 > 2 → D bans R
-D re-added with index 2 + 5 = 7
-R = [4, 5]
-D = [7]
-
-Round 3:
-ri = 4, di = 7
-4 < 7 → R bans D
-R re-added with index 4 + 5 = 9
-R = [5, 9]
-D = []
-
-D queue empty
-
-RESULT:
-Radiant wins
-
-========================
-TIME COMPLEXITY: O(n)
-SPACE COMPLEXITY: O(n)
-========================
-END
-========================
-*/

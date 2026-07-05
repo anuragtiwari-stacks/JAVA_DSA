@@ -12,11 +12,6 @@ public class _10PrefixEvaluation
         {
             char ch = expr.charAt(i);
 
-            if (ch == ' ')
-            {
-                continue;
-            }
-
             if (Character.isDigit(ch))
             {
                 stack.push(ch - '0');

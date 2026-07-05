@@ -13,11 +13,6 @@ public class _7InfixToPostfix
         {
             char ch = infix.charAt(i);
 
-            if (ch == ' ')
-            {
-                continue;
-            }
-
             if (Character.isLetterOrDigit(ch))
             {
                 result.append(ch);

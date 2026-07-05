@@ -12,10 +12,6 @@ public class _9PostfixEvaluation
         {
             char ch = expr.charAt(i);
 
-            if (ch == ' ')
-            {
-                continue;
-            }
 
             if (Character.isDigit(ch))
             {
