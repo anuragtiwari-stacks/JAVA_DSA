@@ -42,8 +42,7 @@ public class _5WordSearch
         {
             if(board[r - 1][c] == word.charAt(idx + 1) && !visited[r - 1][c])
             {
-                if(WordSearch(board, visited, word,
-                        r - 1, c, idx + 1))
+                if(WordSearch(board, visited, word, r - 1, c, idx + 1))
                 {
                     return true;
                 }
@@ -55,8 +54,7 @@ public class _5WordSearch
         {
             if(board[r + 1][c] == word.charAt(idx + 1) && !visited[r + 1][c])
             {
-                if(WordSearch(board, visited, word,
-                        r + 1, c, idx + 1))
+                if(WordSearch(board, visited, word, r + 1, c, idx + 1))
                 {
                     return true;
                 }
@@ -68,8 +66,7 @@ public class _5WordSearch
         {
             if(board[r][c - 1] == word.charAt(idx + 1) && !visited[r][c - 1])
             {
-                if(WordSearch(board, visited, word,
-                        r, c - 1, idx + 1))
+                if(WordSearch(board, visited, word, r, c - 1, idx + 1))
                 {
                     return true;
                 }
@@ -81,8 +78,7 @@ public class _5WordSearch
         {
             if(board[r][c + 1] == word.charAt(idx + 1)  && !visited[r][c + 1])
             {
-                if(WordSearch(board, visited, word,
-                        r, c + 1, idx + 1))
+                if(WordSearch(board, visited, word, r, c + 1, idx + 1))
                 {
                     return true;
                 }
