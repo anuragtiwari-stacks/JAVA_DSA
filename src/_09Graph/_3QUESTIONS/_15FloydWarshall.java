@@ -9,7 +9,7 @@ package _09Graph._3QUESTIONS;
 //    - Negative cycle check nahi kiya
 //    - INF condition check nahi kiya
 
-public class _15FloydWarshall
+public class    _15FloydWarshall
 {
     static final int INF = 1000000000;
 
