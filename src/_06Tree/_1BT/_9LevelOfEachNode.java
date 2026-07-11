@@ -1,3 +1,5 @@
+package _06Tree._1BT;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
