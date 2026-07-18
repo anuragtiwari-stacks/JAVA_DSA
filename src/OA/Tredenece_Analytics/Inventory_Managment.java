@@ -81,9 +81,9 @@ public class Inventory_Managment
         String[] result = new String[map.size()];
         int index = 0;
 
-        for(Map.Entry<String, Integer> entry : map.entrySet())
+        for (String key : map.keySet())
         {
-            result[index++] = entry.getKey() + " " + entry.getValue();
+            result[index++] = key + " " + map.get(key);
         }
 
         return result;
