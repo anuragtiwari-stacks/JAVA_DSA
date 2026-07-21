@@ -18,19 +18,6 @@ package OA.TCS;
  *
  * Print the median with two decimal places.
  *
- * Example:
- *
- * Road A = {3, 5, 2}
- * Road B = {1, 2, 3}
- *
- * Combined = {3,5,2,1,2,3}
- * Unique   = {1,2,3,5}
- *
- * Median = (2 + 3) / 2 = 2.50
- *
- * Output:
- * 2.50
- *
  * Time Complexity : O((N1 + N2) log (N1 + N2))
  * Space Complexity: O(N1 + N2)
  */
@@ -38,6 +25,7 @@ package OA.TCS;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class BridgeConstruction
 {
@@ -90,28 +78,32 @@ public class BridgeConstruction
 
     public static void main(String[] args)
     {
-        // Predefined Input
+        Scanner sc = new Scanner(System.in);
 
-        int[] roadA =
-                {
-                        3, 5, 2
-                };
+        // Road A Input
+        int n1 = sc.nextInt();
 
-        int[] roadB =
-                {
-                        1, 2, 3
-                };
+        int[] roadA = new int[n1];
 
-        System.out.print("Road A Positions : ");
-        displayArray(roadA);
+        for(int i = 0; i < n1; i++)
+        {
+            roadA[i] = sc.nextInt();
+        }
 
-        System.out.print("Road B Positions : ");
-        displayArray(roadB);
+        // Road B Input
+        int n2 = sc.nextInt();
 
-        System.out.println();
+        int[] roadB = new int[n2];
+
+        for(int i = 0; i < n2; i++)
+        {
+            roadB[i] = sc.nextInt();
+        }
 
         double median = findMedian(roadA, roadB);
 
-        System.out.printf("Median = %.2f\n", median);
+        System.out.printf("%.2f\n", median);
+
+        sc.close();
     }
 }

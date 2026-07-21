@@ -13,6 +13,7 @@ package OA.TCS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class AbsentNumberFunction
 {
@@ -72,10 +73,19 @@ public class AbsentNumberFunction
 
     public static void main(String[] args)
     {
-        // Predefined Input
+        Scanner sc = new Scanner(System.in);
 
-        int[] arr = {1, 2, 1};
+        int n = sc.nextInt();
 
-        System.out.println("Answer = " + solve(arr));
+        int[] arr = new int[n];
+
+        for(int i = 0; i < n; i++)
+        {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println(solve(arr));
+
+        sc.close();
     }
 }
