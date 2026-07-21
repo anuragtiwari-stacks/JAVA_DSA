@@ -35,7 +35,7 @@ public class _1UniqueNumberOfOccurrences
         // Step 2: Check if frequencies are unique
         HashSet<Integer> set = new HashSet<>();
 
-        for (int freq : map.values())
+        for (int freq : map.keySet())
         {
             if (set.contains(freq))
             {
