@@ -1,15 +1,9 @@
 package _20DynamicProgramming;
 
-// LeetCode 494 - Target Sum (Memoization using 2D Array)
-
 public class _17TargetSum_Memoization
 {
-    static int[][] dp;
-    static int offset;
-
-    public static int solve(int[] nums, int target, int i, int currSum)
+    public static int solve(int[] nums, int target, int i, int currSum ,int totalSum, int [][]dp)
     {
-        // Base Case
         if (i == nums.length)
         {
             if (currSum == target)
@@ -20,22 +14,19 @@ public class _17TargetSum_Memoization
             return 0;
         }
 
-        // Already Computed
-        if (dp[i][currSum + offset] != -1)
+        if(dp[i][currSum+totalSum]!=-1)
         {
-            return dp[i][currSum + offset];
+            return dp[i][currSum+totalSum];
         }
 
-        // + Sign
-        int plus = solve(nums, target, i + 1, currSum + nums[i]);
+        // + sign
+        int plus = solve(nums, target, i + 1, currSum + nums[i],totalSum, dp);
 
-        // - Sign
-        int minus = solve(nums, target, i + 1, currSum - nums[i]);
+        // - sign
+        int minus = solve(nums, target, i + 1, currSum - nums[i],totalSum, dp);
 
-        // Store Answer
-        dp[i][currSum + offset] = plus + minus;
-
-        return dp[i][currSum + offset];
+        dp[i][currSum+totalSum] = plus + minus;
+        return dp[i][currSum+totalSum];
     }
 
     public static void main(String[] args)
@@ -43,30 +34,41 @@ public class _17TargetSum_Memoization
         int[] nums = {1, 1, 1, 1, 1};
         int target = 3;
 
-        // Calculate maximum possible sum
         int totalSum = 0;
-        for (int num : nums)
+        for(int x: nums)
         {
-            totalSum += num;
+            totalSum=totalSum+x;
         }
 
-        // Offset for handling negative sums
-        offset = totalSum;
+        int r = nums.length;
+        int c = 2*totalSum+1;
+        int [][]dp = new int[r][c];
 
-        // DP Array
-        dp = new int[nums.length][2 * totalSum + 1];
-
-        // Initialize with -1
-        for (int i = 0; i < nums.length; i++)
+        for(int i=0;i<r;i++)
         {
-            for (int j = 0; j < 2 * totalSum + 1; j++)
+            for(int j=0;j<c;j++)
             {
-                dp[i][j] = -1;
+                dp[i][j]=-1;
             }
         }
-
-        int ans = solve(nums, target, 0, 0);
+        int ans = solve(nums, target, 0, 0, totalSum, dp);
 
         System.out.println(ans);
     }
 }
+
+/*
+currSum       DP column index
+
+  -5     →    -5 + 5 = 0
+  -4     →    -4 + 5 = 1
+  -3     →    -3 + 5 = 2
+  -2     →    -2 + 5 = 3
+  -1     →    -1 + 5 = 4
+   0     →     0 + 5 = 5
+   1     →     1 + 5 = 6
+   2     →     2 + 5 = 7
+   3     →     3 + 5 = 8
+   4     →     4 + 5 = 9
+   5     →     5 + 5 = 10
+*/
