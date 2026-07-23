@@ -16,36 +16,22 @@ public class _12PrimsAlgorithm
         }
     }
 
-    static class Triplet
-    {
-        int node;
-        int parent;
-        int weight;
-
-        Triplet(int node, int parent, int weight)
-        {
-            this.node = node;
-            this.parent = parent;
-            this.weight = weight;
-        }
-    }
-
     public int primsMST(int V, ArrayList<ArrayList<Pair>> adj)
     {
         boolean[] visited = new boolean[V];
 
-        PriorityQueue<Triplet> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.weight, b.weight));
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.weight, b.weight));
 
-        pq.add(new Triplet(0, -1, 0));
+        // node = 0, weight = 0
+        pq.add(new Pair(0, 0));
 
         int mstSum = 0;
 
         while (!pq.isEmpty())
         {
-            Triplet cur = pq.remove();
+            Pair cur = pq.remove();
 
             int node = cur.node;
-            int parent = cur.parent;
             int wt = cur.weight;
 
             if (visited[node])
@@ -54,15 +40,14 @@ public class _12PrimsAlgorithm
             }
 
             visited[node] = true;
+
             mstSum = mstSum + wt;
 
             for (Pair nei : adj.get(node))
             {
                 if (!visited[nei.node])
                 {
-                    int nextNode = nei.node;
-                    int nextWeight = nei.weight;
-                    pq.add(new Triplet(nextNode, node, nextWeight));
+                    pq.add(new Pair(nei.node, nei.weight));
                 }
             }
         }
@@ -81,7 +66,6 @@ public class _12PrimsAlgorithm
             adj.add(new ArrayList<>());
         }
 
-        // Undirected weighted graph
         adj.get(0).add(new Pair(1, 2));
         adj.get(1).add(new Pair(0, 2));
 
@@ -102,8 +86,6 @@ public class _12PrimsAlgorithm
 
         _12PrimsAlgorithm obj = new _12PrimsAlgorithm();
 
-        int ans = obj.primsMST(V, adj);
-
-        System.out.println("MST Total Weight = " + ans);
+        System.out.println(obj.primsMST(V, adj));
     }
 }
