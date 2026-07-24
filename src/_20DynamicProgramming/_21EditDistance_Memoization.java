@@ -1,43 +1,42 @@
 package _20DynamicProgramming;
 
-// LeetCode 72 - Edit Distance (Memoization)
-
+// LeetCode 72 - Edit Distance (Forward Recursion + Memoization)
 public class _21EditDistance_Memoization
 {
-    static int[][] dp;
-
     public static int minDistance(String word1, String word2)
     {
-        int n = word1.length();
-        int m = word2.length();
+        int m = word1.length();
+        int n = word2.length();
 
-        dp = new int[n][m];
+        int[][] dp = new int[m][n];
 
-        // initialize dp with -1
-        for (int i = 0; i < n; i++)
+        // Initialize dp with -1 using nested loops
+        for (int i = 0; i < m; i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j < n; j++)
             {
                 dp[i][j] = -1;
             }
         }
 
-        return solve(word1, word2, 0, 0);
+        return solve(word1, word2, 0, 0, dp);
     }
 
-    public static int solve(String s1, String s2, int i, int j)
+    private static int solve(String s1, String s2, int i, int j, int[][] dp)
     {
-        // base case
-        if (i == s1.length())
+        int m = s1.length();
+        int n = s2.length();
+
+        // s1 finished
+        if (i == m)
         {
-            // insert remaining chars of s2
-            return s2.length() - j;
+            return n - j;
         }
 
-        if (j == s2.length())
+        // s2 finished
+        if (j == n)
         {
-            // delete remaining chars of s1
-            return s1.length() - i;
+            return m - i;
         }
 
         // already calculated
@@ -49,14 +48,15 @@ public class _21EditDistance_Memoization
         // characters match
         if (s1.charAt(i) == s2.charAt(j))
         {
-            return dp[i][j] = solve(s1, s2, i + 1, j + 1);
+            return dp[i][j] = solve(s1, s2, i + 1, j + 1, dp);
         }
 
-        int insert = 1 + solve(s1, s2, i, j + 1);
+        // operations
+        int insert = 1 + solve(s1, s2, i, j + 1, dp);
 
-        int delete = 1 + solve(s1, s2, i + 1, j);
+        int delete = 1 + solve(s1, s2, i + 1, j, dp);
 
-        int replace = 1 + solve(s1, s2, i + 1, j + 1);
+        int replace = 1 + solve(s1, s2, i + 1, j + 1, dp);
 
         return dp[i][j] = Math.min(insert, Math.min(delete, replace));
     }

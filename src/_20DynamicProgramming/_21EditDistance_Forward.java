@@ -1,36 +1,42 @@
 package _20DynamicProgramming;
 
-// LeetCode 72 - Edit Distance (Backward Recursion)
+// LeetCode 72 - Edit Distance (Forward Recursion)
 public class _21EditDistance_Forward
 {
     public static int minDistance(String word1, String word2)
     {
-        return solve(word1, word2, word1.length() - 1, word2.length() - 1);
+        return solve(word1, word2, 0, 0);
     }
 
     private static int solve(String s1, String s2, int i, int j)
     {
-        // base cases
-        if (i < 0)
+        int m = s1.length();
+        int n = s2.length();
+
+        // s1 finished
+        // insert all remaining characters of s2
+        if (i == m)
         {
-            return j + 1;   // insert remaining characters of s2
+            return n - j;
         }
 
-        if (j < 0)
+        // s2 finished
+        // delete all remaining characters of s1
+        if (j == n)
         {
-            return i + 1;   // delete remaining characters of s1
+            return m - i;
         }
 
         // characters match
         if (s1.charAt(i) == s2.charAt(j))
         {
-            return solve(s1, s2, i - 1, j - 1);
+            return solve(s1, s2, i + 1, j + 1);
         }
 
         // operations
-        int insert  = 1 + solve(s1, s2, i, j - 1);
-        int delete  = 1 + solve(s1, s2, i - 1, j);
-        int replace = 1 + solve(s1, s2, i - 1, j - 1);
+        int insert  = 1 + solve(s1, s2, i, j + 1);
+        int delete  = 1 + solve(s1, s2, i + 1, j);
+        int replace = 1 + solve(s1, s2, i + 1, j + 1);
 
         return Math.min(insert, Math.min(delete, replace));
     }
@@ -45,35 +51,140 @@ public class _21EditDistance_Forward
 }
 
 /*
-==================== DRY RUN (BACKWARD) ====================
+==================== DRY RUN (FORWARD) ====================
 
 word1 = "horse"
 word2 = "ros"
 
 Start:
-solve(4,2) -> e vs s (not equal)
+solve(0,0)
 
-Operations:
-Insert  -> 1 + solve(4,1)
-Delete  -> 1 + solve(3,2)
-Replace -> 1 + solve(3,1)
+i = 0 -> 'h'
+j = 0 -> 'r'
 
------------------------------------------------
-solve(3,1) -> s vs o (not equal)
+'h' != 'r'
 
-Insert  -> 1 + solve(3,0)
-Delete  -> 1 + solve(2,1)
-Replace -> 1 + solve(2,0)
+Three choices:
 
------------------------------------------------
-Eventually best path:
+Insert:
+1 + solve(0,1)
 
-horse → hors   (delete e)
-hors  → hor    (delete s)
-hor   → or     (delete h)
-or    → ror    (insert r)
-ror   → ros    (replace r → s)
+Delete:
+1 + solve(1,0)
 
-Minimum Edit Distance = 3
+Replace:
+1 + solve(1,1)
+
+------------------------------------------------
+
+Important meaning:
+
+INSERT:
+solve(i, j + 1)
+
+We insert s2[j] into s1.
+
+i stays same because original s1[i]
+has not been processed yet.
+
+j moves forward because s2[j]
+has been matched using insertion.
+
+------------------------------------------------
+
+DELETE:
+solve(i + 1, j)
+
+We delete s1[i].
+
+i moves forward because s1[i]
+has been removed.
+
+j stays same because s2[j]
+still needs to be matched.
+
+------------------------------------------------
+
+REPLACE:
+solve(i + 1, j + 1)
+
+We replace s1[i] with s2[j].
+
+Both characters are processed,
+so both i and j move forward.
+
+------------------------------------------------
+
+MATCH:
+
+If:
+
+s1.charAt(i) == s2.charAt(j)
+
+No operation required:
+
+solve(i + 1, j + 1)
+
+------------------------------------------------
+
+BASE CASES:
+
+if (i == m)
+{
+    return n - j;
+}
+
+s1 is finished.
+
+Example:
+
+s1 = "horse"
+             ↑ i == m
+
+s2 = "ros"
+        ↑ j
+
+If 2 characters remain in s2,
+we need 2 INSERT operations.
+
+Therefore:
+
+return n - j;
+
+------------------------------------------------
+
+if (j == n)
+{
+    return m - i;
+}
+
+s2 is finished.
+
+Any remaining characters in s1
+must be DELETED.
+
+Therefore:
+
+return m - i;
+
+------------------------------------------------
+
+Answer:
+
+minDistance("horse", "ros") = 3
+
+One optimal transformation:
+
+horse
+↓ delete 'h'
+orse
+↓ delete 'r'
+ose
+↓ delete 'e'
+os
+
+Conceptually aligning/editing gives minimum
+Edit Distance = 3.
+
 ================================================
 */
