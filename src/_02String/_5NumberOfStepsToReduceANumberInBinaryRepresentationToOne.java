@@ -1,6 +1,6 @@
 package _02String;
 
-// LeetCode 404. Number of Steps to Reduce a Number in Binary Representation to One
+// LeetCode 1404. Number of Steps to Reduce a Number in Binary Representation to One
 
 public class _5NumberOfStepsToReduceANumberInBinaryRepresentationToOne
 {

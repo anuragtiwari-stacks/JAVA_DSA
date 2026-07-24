@@ -2,6 +2,7 @@ package _02String;
 
 import java.util.*;
 
+// Leetcode: 3120. Count the Number of Special Characters
 public class _10SpecialCharacters
 {
     public static int numberOfSpecialChars(String word)
