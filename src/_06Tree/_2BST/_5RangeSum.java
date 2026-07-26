@@ -46,14 +46,14 @@ public class _5RangeSum
             sum += rangeSum(root.left, low, high);
         }
 
-        if (root.value >= low && root.value <= high)
-        {
-            sum += root.value;
-        }
-
         if (root.value < high)
         {
             sum += rangeSum(root.right, low, high);
+        }
+
+        if (root.value >= low && root.value <= high)
+        {
+            sum += root.value;
         }
 
         return sum;
