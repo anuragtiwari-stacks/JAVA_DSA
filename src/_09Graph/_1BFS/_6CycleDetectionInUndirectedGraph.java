@@ -88,7 +88,7 @@ public class _6CycleDetectionInUndirectedGraph
 
                     queue.add(new Pairs(neighbor, node));
                 }
-                else if (neighbor != parent)
+                else if (visited[neighbor] && neighbor != parent)
                 {
                     return true;
                 }
