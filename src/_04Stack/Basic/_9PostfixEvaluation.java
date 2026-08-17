@@ -19,13 +19,13 @@ public class _9PostfixEvaluation
             }
             else
             {
-                int v2 = stack.pop();
                 int v1 = stack.pop();
+                int v2 = stack.pop();
 
-                if (ch == '+') stack.push(v1 + v2);
-                else if (ch == '-') stack.push(v1 - v2);
-                else if (ch == '*') stack.push(v1 * v2);
-                else if (ch == '/') stack.push(v1 / v2);
+                if (ch == '+') stack.push(v2 + v1);
+                else if (ch == '-') stack.push(v2 - v1);
+                else if (ch == '*') stack.push(v2 * v1);
+                else if (ch == '/') stack.push(v2 / v1);
             }
         }
 
