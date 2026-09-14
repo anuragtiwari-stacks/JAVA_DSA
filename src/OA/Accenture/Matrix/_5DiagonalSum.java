@@ -1,6 +1,6 @@
 package OA.Accenture.Matrix;
 
-// Question: Find the sum of the diagonal elements of a matrix
+// Question: Find the sum of Primary and Secondary Diagonal elements
 
 public class _5DiagonalSum
 {
@@ -13,24 +13,25 @@ public class _5DiagonalSum
                         {7, 8, 9}
                 };
 
-        System.out.println(diagonalSum(matrix));
+        diagonalSum(matrix);
     }
 
-    static int diagonalSum(int[][] matrix)
+    static void diagonalSum(int[][] matrix)
     {
-        int sum = 0;
+        int primarySum = 0;
+        int secondarySum = 0;
         int n = matrix.length;
 
         for(int i = 0; i < n; i++)
         {
-            sum += matrix[i][i];
+            // Primary Diagonal
+            primarySum += matrix[i][i];
 
-            if(i != n - 1 - i)
-            {
-                sum += matrix[i][n - 1 - i];
-            }
+            // Secondary Diagonal
+            secondarySum += matrix[i][n - 1 - i];
         }
 
-        return sum;
+        System.out.println("Primary Diagonal Sum: " + primarySum);
+        System.out.println("Secondary Diagonal Sum: " + secondarySum);
     }
 }

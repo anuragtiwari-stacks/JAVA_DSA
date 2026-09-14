@@ -18,45 +18,49 @@ public class _2SpiralMatrix
 
     static void printSpiral(int[][] matrix)
     {
-        int top = 0;
-        int bottom = matrix.length - 1;
-        int left = 0;
-        int right = matrix[0].length - 1;
+        int minR = 0;
+        int maxR = matrix.length - 1;
+        int minC = 0;
+        int maxC = matrix[0].length - 1;
 
-        while(top <= bottom && left <= right)
+        while(minR <= maxR && minC <= maxC)
         {
-            for(int i = left; i <= right; i++)
+            // Left -> Right
+            for(int i = minC; i <= maxC; i++)
             {
-                System.out.print(matrix[top][i] + " ");
+                System.out.print(matrix[minR][i] + " ");
             }
 
-            top++;
+            minR++;
 
-            for(int i = top; i <= bottom; i++)
+            // Top -> Bottom
+            for(int i = minR; i <= maxR; i++)
             {
-                System.out.print(matrix[i][right] + " ");
+                System.out.print(matrix[i][maxC] + " ");
             }
 
-            right--;
+            maxC--;
 
-            if(top <= bottom)
+            // Right -> Left
+            if(minR <= maxR)
             {
-                for(int i = right; i >= left; i--)
+                for(int i = maxC; i >= minC; i--)
                 {
-                    System.out.print(matrix[bottom][i] + " ");
+                    System.out.print(matrix[maxR][i] + " ");
                 }
 
-                bottom--;
+                maxR--;
             }
 
-            if(left <= right)
+            // Bottom -> Top
+            if(minC <= maxC)
             {
-                for(int i = bottom; i >= top; i--)
+                for(int i = maxR; i >= minR; i--)
                 {
-                    System.out.print(matrix[i][left] + " ");
+                    System.out.print(matrix[i][minC] + " ");
                 }
 
-                left++;
+                minC++;
             }
         }
     }
