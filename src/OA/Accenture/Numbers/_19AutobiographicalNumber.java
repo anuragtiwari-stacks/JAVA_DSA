@@ -6,39 +6,33 @@ public class _19AutobiographicalNumber
 {
     public static void main(String[] args)
     {
-        int n = 1210;
+        int num = 1210;
 
-        System.out.println(isAutobiographical(n));
+        System.out.println(isAutobiographical(num));
     }
 
-    static boolean isAutobiographical(int n)
+    public static boolean isAutobiographical(int num)
     {
-        String s = String.valueOf(n);
+        String st = String.valueOf(num);
 
-        // count[i] = digit i kitni baar aaya
-        int[] count = new int[s.length()];
+        int n = st.length();
+        int []freq = new int[n];
 
-        // Count frequency of each digit
-        for(int i = 0; i < s.length(); i++)
+
+        for(int i=0;i<n;i++)
         {
-            int digit = s.charAt(i) - '0';
-
-            count[digit]++;
+            int digit = st.charAt(i)-'0';
+            freq[digit]++;
         }
 
-        // Check:
-        // position i par jo digit hai,
-        // wahi batana chahiye ki digit i kitni baar aaya
-        for(int i = 0; i < s.length(); i++)
+        for(int i=0;i<n;i++)
         {
-            int digit = s.charAt(i) - '0';
-
-            if(count[i] != digit)
+            int digit = st.charAt(i)-'0';
+            if(digit != freq[i])
             {
                 return false;
             }
         }
-
         return true;
     }
 }

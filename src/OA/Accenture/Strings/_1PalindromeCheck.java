@@ -13,20 +13,10 @@ public class _1PalindromeCheck
 
     static boolean isPalindrome(String str)
     {
-        int left = 0;
-        int right = str.length() - 1;
+        StringBuilder sb = new StringBuilder(str);
 
-        while(left < right)
-        {
-            if(str.charAt(left) != str.charAt(right))
-            {
-                return false;
-            }
+        String reverse = sb.reverse().toString();
 
-            left++;
-            right--;
-        }
-
-        return true;
+        return str.equals(reverse);
     }
 }
